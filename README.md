@@ -96,41 +96,77 @@ pnpm dev:website
 
 Starts the Next.js website and Convex backend.
 
-**Option C: Run Mobile Only**
+**Option C: Run Mobile (iOS)**
 
 ```bash
-pnpm dev:mobile
+pnpm dev:mobile:ios
 ```
 
-Starts the Expo mobile app and Convex backend.
+Starts the Expo mobile app (iOS) and Convex backend.
+
+**Option D: Run Mobile (Android)**
+
+```bash
+pnpm dev:mobile:android
+```
+
+Starts the Expo mobile app (Android) and Convex backend.
 
 ## 📱 Mobile Development
 
 ### Running on iOS Simulator (macOS)
 
+From the root directory:
+
 ```bash
-cd mobile
-pnpm ios
+pnpm dev:mobile:ios
+```
+
+This starts the mobile app (iOS) and Convex backend together.
+
+To run only the mobile app without Convex:
+
+```bash
+pnpm dev:mobile-only:ios
 ```
 
 ### Running on Android Emulator
 
+From the root directory:
+
 ```bash
-cd mobile
-pnpm android
+pnpm dev:mobile:android
+```
+
+This starts the mobile app (Android) and Convex backend together.
+
+To run only the mobile app without Convex:
+
+```bash
+pnpm dev:mobile-only:android
 ```
 
 ### Running on Physical Device
 
 1. Install the Expo Go app on your device
-2. Start the development server:
+2. Start the development server from the root:
    ```bash
-   cd mobile
-   pnpm start
+   pnpm dev:mobile-only:ios
+   # or
+   pnpm dev:mobile-only:android
    ```
 3. Scan the QR code with Expo Go (iOS) or the Expo app (Android)
 
+Alternatively, you can run from the mobile directory:
+
+```bash
+cd mobile
+pnpm start
+```
+
 ### Running Mobile Web Version
+
+From the mobile directory:
 
 ```bash
 cd mobile
@@ -160,15 +196,17 @@ boilerplate-2026/
 
 ### Root Level
 
-| Command                 | Description                       |
-| ----------------------- | --------------------------------- |
-| `pnpm dev:all`          | Start website, mobile, and Convex |
-| `pnpm dev:website`      | Start website and Convex          |
-| `pnpm dev:mobile`       | Start mobile and Convex           |
-| `pnpm dev:website-only` | Start only website                |
-| `pnpm dev:mobile-only`  | Start only mobile                 |
-| `pnpm dev:convex`       | Start only Convex                 |
-| `pnpm build`            | Build website for production      |
+| Command                        | Description                       |
+| ------------------------------ | --------------------------------- |
+| `pnpm dev:all`                 | Start website, mobile, and Convex |
+| `pnpm dev:website`             | Start website and Convex          |
+| `pnpm dev:website-only`        | Start only website                |
+| `pnpm dev:mobile:ios`          | Start mobile (iOS) and Convex     |
+| `pnpm dev:mobile:android`      | Start mobile (Android) and Convex |
+| `pnpm dev:mobile-only:ios`     | Start only mobile (iOS)           |
+| `pnpm dev:mobile-only:android` | Start only mobile (Android)       |
+| `pnpm dev:convex`              | Start only Convex                 |
+| `pnpm build`                   | Build website for production      |
 
 ### Website (`website/`)
 
