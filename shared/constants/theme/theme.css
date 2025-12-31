@@ -1,0 +1,265 @@
+@custom-variant dark (&:is(.dark *));
+
+
+:root {
+  --brand: oklch(0.1 0 0);
+  --background: oklch(1 0 0);
+  --background-secondary: oklch(0.97 0 0);
+  --foreground: oklch(0.145 0 0);
+  --foreground-secondary: oklch(0.556 0 0);
+  --placeholder: oklch(0.5 0 0);
+  --destructive: oklch(0.577 0.245 27.325);
+  --success: oklch(0.7 0.17 148);
+  --warning: oklch(0.6671 0.1685 53.38);
+  --border: oklch(0.8 0 0);
+  --tab-selected: oklch(0.85 0 0);
+
+  /* Shadcn UI Theme */
+  --radius: 0.625rem;
+  --card-foreground: oklch(0.145 0 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.145 0 0);
+  --primary-foreground: oklch(0.985 0 0);
+  --secondary-foreground: oklch(0.205 0 0);
+  --accent-foreground: oklch(0.205 0 0);
+  --chart-1: oklch(0.646 0.222 41.116);
+  --chart-2: oklch(0.6 0.118 184.704);
+  --chart-3: oklch(0.398 0.07 227.392);
+  --chart-4: oklch(0.828 0.189 84.429);
+  --chart-5: oklch(0.769 0.188 70.08);
+  --sidebar: oklch(0.985 0 0);
+  --sidebar-foreground: oklch(0.145 0 0);
+  --sidebar-primary: oklch(0.205 0 0);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.97 0 0);
+  --sidebar-accent-foreground: oklch(0.205 0 0);
+  --sidebar-border: oklch(0.922 0 0);
+  --sidebar-ring: oklch(0.708 0 0);
+
+}
+
+.dark {
+  --brand: oklch(1 0 0);
+  --background: oklch(0.145 0 0);
+  --background-secondary: oklch(0.269 0 0);
+  --foreground: oklch(0.985 0 0);
+  --foreground-secondary: oklch(0.708 0 0);
+  --placeholder: oklch(0.65 0 0);
+  --destructive: oklch(0.704 0.191 22.216);
+  --success: oklch(0.69 0.19 152);
+  --warning: oklch(0.8 0.16 85);
+  --border: oklch(0.45 0 0);
+  --tab-selected: oklch(0.4 0 0);
+
+  /* Shadcn UI Theme */
+  --card-foreground: oklch(0.985 0 0);
+  --popover: oklch(0.205 0 0);
+  --popover-foreground: oklch(0.985 0 0);
+  --primary-foreground: oklch(0.205 0 0);
+  --secondary-foreground: oklch(0.985 0 0);
+  --accent-foreground: oklch(0.985 0 0);
+  --chart-1: oklch(0.488 0.243 264.376);
+  --chart-2: oklch(0.696 0.17 162.48);
+  --chart-3: oklch(0.769 0.188 70.08);
+  --chart-4: oklch(0.627 0.265 303.9);
+  --chart-5: oklch(0.645 0.246 16.439);
+  --sidebar: oklch(0.205 0 0);
+  --sidebar-foreground: oklch(0.985 0 0);
+  --sidebar-primary: oklch(0.488 0.243 264.376);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.269 0 0);
+  --sidebar-accent-foreground: oklch(0.985 0 0);
+  --sidebar-border: oklch(1 0 0 / 10%);
+  --sidebar-ring: oklch(0.556 0 0);
+}
+
+@theme {
+  --color-background: var(--background);
+  --color-background-secondary: var(--background-secondary);
+  --color-foreground: var(--foreground);
+  --color-foreground-secondary: var(--foreground-secondary);
+  --color-placeholder: var(--placeholder);
+  --color-destructive: var(--destructive);
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --color-border: var(--border);
+  --color-tab-selected: var(--tab-selected);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+  --color-brand: var(--brand);
+}
+
+/* Shadcn UI Theme Inline */
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-background: var(--background);
+  --color-background-secondary: var(--background-secondary);
+  --color-foreground: var(--foreground);
+  --color-placeholder: var(--placeholder);
+  --color-foreground-secondary: var(--foreground-secondary);
+  --color-destructive: var(--destructive);
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --color-brand: var(--brand);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+
+@layer base {
+  * {
+    @apply outline-brand/20;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+
+  /* MARK: Font family configuration */
+  .font-sans {
+    font-family: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  }
+
+  .font-mono {
+    font-family:
+      var(--font-jetbrains-mono), ui-monospace, SFMono-Regular, "SF Mono",
+      Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  }
+
+  /* MARK: Smooth scrolling */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* MARK: Scroll offset for sticky navbar */
+  section[id] {
+    scroll-margin-top: 5rem; /* Account for sticky navbar + extra padding */
+  }
+}
+
+/* MARK: Min-height utilities for text lines */
+@layer utilities {
+  .min-lines-1 {
+    min-height: calc(var(--tw-leading, 1) * 1em * 1);
+  }
+  .min-lines-2 {
+    min-height: calc(var(--tw-leading, 1) * 1em * 2);
+  }
+  .min-lines-3 {
+    min-height: calc(var(--tw-leading, 1) * 1em * 3);
+  }
+  .min-lines-4 {
+    min-height: calc(var(--tw-leading, 1) * 1em * 4);
+  }
+  .min-lines-5 {
+    min-height: calc(var(--tw-leading, 1) * 1em * 5);
+  }
+  .min-lines-6 {
+    min-height: calc(var(--tw-leading, 1) * 1em * 6);
+  }
+}
+
+@utility no-scrollbar {
+  @apply [scrollbar-width:none] [&::-webkit-scrollbar]:hidden;
+}
+
+@utility custom-scrollbar {
+  &::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  &::-webkit-scrollbar-track {
+    background: transparent;
+    padding: 1px 2px;
+  }
+  &::-webkit-scrollbar-thumb {
+    @apply bg-foreground-secondary/20 rounded-full;
+    border: 2px solid transparent;
+    background-clip: padding-box;
+    transition: background-color 0.2s ease;
+  }
+  &::-webkit-scrollbar-thumb:hover {
+    @apply bg-foreground-secondary/40;
+  }
+  &::-webkit-scrollbar-thumb:active {
+    @apply bg-foreground-secondary/40;
+  }
+}
+
+/* MARK: Skeleton shimmer animation */
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+
+
+@layer utilities {
+  /* MARK: SwiftUI Text Style Font Sizes */
+  .font-large-title {
+    font-size: 34px;
+  }
+
+  .font-title {
+    font-size: 28px;
+  }
+
+  .font-title2 {
+    font-size: 22px;
+  }
+
+  .font-title3 {
+    font-size: 20px;
+  }
+
+  .font-headline {
+    font-size: 17px;
+  }
+
+  .font-body {
+    font-size: 17px;
+  }
+
+  .font-callout {
+    font-size: 16px;
+  }
+
+  .font-subheadline {
+    font-size: 15px;
+  }
+
+  .font-footnote {
+    font-size: 13px;
+  }
+
+  .font-caption {
+    font-size: 12px;
+  }
+
+  .font-caption2 {
+    font-size: 11px;
+  }
+}

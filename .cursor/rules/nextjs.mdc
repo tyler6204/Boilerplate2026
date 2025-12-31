@@ -1,0 +1,690 @@
+---
+description: Apply when working with Next.js code, including pages, layouts, server components, server actions, API routes, middleware/proxy, routing, caching, images, or any Next.js-specific features. Use for all website-related development in the Next.js project.
+alwaysApply: false
+---
+
+### **nextjs-rules.mdc**
+
+````mdc
+# Next.js 15–16 Upgrade & Coding Rules
+
+## 1. Async Request APIs
+All server APIs that depend on request data (cookies, headers, draftMode, params, searchParams)
+**must be awaited**.
+
+✅ Correct:
+```ts
+import { cookies, headers } from 'next/headers';
+
+export async function Dashboard() {
+  const cookieStore = await cookies();
+  const userToken = cookieStore.get('token')?.value;
+
+  const headerList = await headers();
+  const ua = headerList.get('user-agent');
+}
+````
+
+❌ Incorrect:
+
+```ts
+const cookieStore = cookies();
+const token = cookieStore.get("token");
+```
+
+> Temporary sync access still works but prints warnings; will be removed in Next 17.
+
+---
+
+## 2. `params` and `searchParams`
+
+- Both are **async** in `page.tsx`, `layout.tsx`, `route.ts`, and metadata functions.
+- Destructure them only _after_ awaiting.
+
+✅ Example:
+
+```ts
+export default async function Page({ params, searchParams }) {
+  const { slug } = await params;
+  const { q } = await searchParams;
+}
+```
+
+---
+
+## 3. Middleware → `proxy.ts`
+
+- `middleware.ts` is replaced by **`proxy.ts`**.
+- It runs **on Node.js runtime** (not Edge by default).
+- Use `export default function proxy(req: NextRequest)`.
+
+✅ Example:
+
+```ts
+// proxy.ts
+import { NextResponse } from "next/server";
+
+export default function proxy(req: NextRequest) {
+  if (req.nextUrl.pathname === "/") {
+    return NextResponse.redirect(new URL("/home", req.url));
+  }
+}
+```
+
+⚠️ `middleware.ts` is deprecated but still supported for now; remove it in new apps.
+
+---
+
+## 4. Server Actions Security
+
+- Always mark server actions with `'use server'`.
+- Only imported & referenced actions will expose endpoints.
+- Unused exports are stripped during build.
+
+✅ Example:
+
+```ts
+'use server';
+import { updateTag } from 'next/cache';
+
+export async function updateUser(formData: FormData) {
+  await db.users.update(...);
+  updateTag('users');
+}
+```
+
+---
+
+## 5. New Cache APIs
+
+- Use **`revalidateTag(tag, 'max')`** for SWR behavior.
+- Use **`updateTag(tag)`** for read-your-writes (server action only).
+- Use **`refresh()`** to re-fetch uncached data.
+
+✅ Example:
+
+```ts
+'use server';
+import { revalidateTag, updateTag } from 'next/cache';
+
+export async function updateProduct(id: string) {
+  await db.products.update(id, {...});
+  updateTag(`product-${id}`);
+}
+```
+
+---
+
+## 6. Cache Components & Partial Prerendering (PPR) - NEW IN NEXT.JS 16
+
+**Cache Components** is a revolutionary new approach to rendering and caching that provides fine-grained control over what gets cached and when, enabling **Partial Prerendering (PPR)** for dramatically faster page loads.
+
+### Key Concept: Dynamic by Default, Cache What You Want
+
+With `cacheComponents: true` enabled:
+
+- **All routes are dynamic by default** - every request renders with latest data
+- **You explicitly cache** parts you want pre-rendered using `'use cache'` (⚠️ **must be in async components/functions**)
+- **Static shell + streaming** - cached content loads instantly, dynamic parts stream in
+
+### How It Works
+
+1. **Static Shell**: Pre-rendered cached content (with `'use cache'`) is sent immediately
+2. **Dynamic Streaming**: Dynamic sections wrapped in `<Suspense>` stream in as they become ready
+3. **Best of Both Worlds**: Fast initial load + fresh dynamic data
+
+### Enabling Cache Components
+
+```ts
+// next.config.ts
+const nextConfig: NextConfig = {
+  cacheComponents: true, // Enable Cache Components & PPR
+};
+```
+
+### Using `'use cache'` Directive
+
+⚠️ **CRITICAL**: `'use cache'` **MUST** be used inside **async function components** or **async functions**. It cannot be used in regular (synchronous) components or functions.
+
+Mark components, pages, or functions as cacheable to include them in the pre-rendered shell:
+
+```ts
+import { cacheLife } from "next/cache";
+
+// ✅ CORRECT: Cache a page component (async function component)
+export default async function Page() {
+  "use cache";
+  cacheLife("hours"); // Cache for hours
+  const data = await fetch("https://api.example.com/products");
+  return <div>{/* ... */}</div>;
+}
+
+// ✅ CORRECT: Cache a utility function (async function)
+async function getProducts() {
+  "use cache";
+  cacheLife("hours");
+  return await db.query("SELECT * FROM products");
+}
+
+// ❌ INCORRECT: Cannot use 'use cache' in sync component
+export default function Page() {
+  "use cache"; // ❌ ERROR: Component must be async
+  return <div>Content</div>;
+}
+
+// ❌ INCORRECT: Cannot use 'use cache' in sync function
+function getData() {
+  "use cache"; // ❌ ERROR: Function must be async
+  return fetch("/api/data");
+}
+```
+
+**Key Requirements**:
+
+- Component/function **must be `async`**
+- `'use cache'` directive must be the **first statement** in the function body
+- Works with Server Components, Server Actions, and async utility functions
+- Cannot be used in Client Components (`'use client'`)
+
+### Using Suspense Boundaries
+
+Wrap dynamic/runtime data in `<Suspense>` to enable streaming:
+
+```tsx
+import { Suspense } from "react";
+
+export default function Page() {
+  return (
+    <>
+      <h1>Pre-rendered instantly</h1>
+      <Suspense fallback={<Skeleton />}>
+        <DynamicContent /> {/* Streams in when ready */}
+      </Suspense>
+    </>
+  );
+}
+
+async function DynamicContent() {
+  const res = await fetch("http://api.cms.com/posts");
+  const { posts } = await res.json();
+  return <div>{/* ... */}</div>;
+}
+```
+
+### Runtime vs Dynamic Data
+
+**Runtime APIs** (must use Suspense):
+
+- `cookies()`, `headers()`, `searchParams`, `params` (unless in `generateStaticParams`)
+
+**Dynamic Data** (use Suspense for streaming):
+
+- `fetch()` calls, database queries, `connection()`
+
+**Cached Data** (use `'use cache'`):
+
+- Data that doesn't change often and can be pre-rendered
+
+### Cache Tagging & Revalidation
+
+Tag cached data and revalidate after mutations:
+
+```ts
+import { cacheTag, updateTag, revalidateTag } from 'next/cache';
+
+// Tag cached data
+async function getPosts() {
+  'use cache';
+  cacheTag('posts');
+  return await db.query('SELECT * FROM posts');
+}
+
+// Immediate update (read-your-writes)
+'use server';
+export async function updatePost(id: string) {
+  await db.posts.update(id, {...});
+  updateTag('posts');  // Expires & refreshes immediately
+}
+
+// Delayed revalidation (SWR behavior)
+'use server';
+export async function createPost(data: FormData) {
+  await db.posts.create(data);
+  revalidateTag('posts', 'max');  // Stale-while-revalidate
+}
+```
+
+### Migration from Old Route Segment Config
+
+When `cacheComponents: true`, these are **replaced**:
+
+| Old Config                   | New Approach                                  |
+| ---------------------------- | --------------------------------------------- |
+| `dynamic = 'force-dynamic'`  | Not needed (dynamic by default)               |
+| `dynamic = 'force-static'`   | Use `'use cache'` on each Layout/Page         |
+| `revalidate = 3600`          | Use `cacheLife('hours')` inside `'use cache'` |
+| `fetchCache = 'force-cache'` | Use `'use cache'` (all fetches cached)        |
+
+### Benefits
+
+✅ **Faster Initial Loads**: Static shell renders instantly
+✅ **Fresh Dynamic Data**: Dynamic parts stream in with latest data
+✅ **Fine-Grained Control**: Cache exactly what you want, where you want
+✅ **Better UX**: Users see content immediately, not blank screens
+✅ **Works Beyond Fetch**: Cache database queries, computations, any server IO
+
+---
+
+## 7. Caching Defaults & Static Generation
+
+### With Cache Components Enabled (`cacheComponents: true`)
+
+- **All routes are dynamic by default**
+- **Use `'use cache'`** to mark what should be pre-rendered
+- **Use `Suspense`** for dynamic parts that stream in
+- **Route segment config** (`dynamic`, `revalidate`, etc.) is **disabled**
+
+### Without Cache Components (Legacy Mode)
+
+- GET routes are **uncached by default**
+- To cache: `export const dynamic = 'force-static'`
+- Client Router cache default staleTime = 0 (always fresh)
+- Use `revalidate` for ISR (Incremental Static Regeneration)
+
+### Static Generation Strategies
+
+**1. Fully Static Pages** (with Cache Components):
+
+⚠️ **Remember**: Component **must be `async`** to use `'use cache'`.
+
+```ts
+export default async function Page() {
+  "use cache";
+  cacheLife("days"); // Cache for days
+  const data = await getStaticData();
+  return <div>{data}</div>;
+}
+```
+
+**2. Partially Static Pages** (PPR):
+
+```tsx
+export default function Page() {
+  return (
+    <>
+      <StaticHeader /> {/* Pre-rendered */}
+      <Suspense fallback={<Loading />}>
+        <DynamicContent /> {/* Streams in */}
+      </Suspense>
+    </>
+  );
+}
+```
+
+**3. ISR with Tags** (time-based + on-demand):
+
+⚠️ **Remember**: Function **must be `async`** to use `'use cache'`.
+
+```ts
+async function getProducts() {
+  'use cache';
+  cacheTag('products');
+  cacheLife('hours');  // Revalidate every hour
+  return await db.query('SELECT * FROM products');
+}
+
+// On-demand revalidation
+'use server';
+export async function updateProduct() {
+  await db.products.update(...);
+  revalidateTag('products', 'max');  // Invalidate & refresh
+}
+```
+
+---
+
+## 8. `next/image` Optimization & Performance
+
+### Basic Requirements
+
+- Requires **sharp**; squoosh removed.
+- Leading/trailing spaces in `src` cause build errors.
+- Default `Content-Disposition` = `attachment`.
+
+### Image Loading Strategies
+
+Optimize image loading performance by strategically using `loading`, `decoding`, `quality`, and `priority` props.
+
+#### Loading Prop (`loading`)
+
+Controls when the browser starts loading the image:
+
+- **`loading="eager"`**: Load immediately (above-the-fold, critical images)
+- **`loading="lazy"`**: Load when near viewport (below-the-fold, non-critical images)
+
+✅ **Correct Usage**:
+
+```tsx
+import Image from "next/image";
+
+// Above-the-fold hero image
+<Image
+  src="/hero.jpg"
+  alt="Hero"
+  width={1920}
+  height={1080}
+  loading="eager"
+  priority
+/>;
+
+// Below-the-fold gallery images
+{
+  images.map((img, index) => (
+    <Image
+      key={img.id}
+      src={img.src}
+      alt={img.alt}
+      width={800}
+      height={600}
+      loading={index < 15 ? "eager" : "lazy"} // First 15 eager, rest lazy
+    />
+  ));
+}
+```
+
+#### Decoding Prop (`decoding`)
+
+Controls how the browser decodes the image:
+
+- **`decoding="sync"`**: Decode synchronously (blocks rendering, use for critical images)
+- **`decoding="async"`**: Decode asynchronously (non-blocking, use for non-critical images)
+
+✅ **Best Practice**: Match decoding to loading strategy:
+
+```tsx
+// Critical image: eager + sync
+<Image
+  src="/logo.png"
+  alt="Logo"
+  width={197}
+  height={80}
+  priority
+  loading="eager"
+  decoding="sync"
+  quality={75}
+/>
+
+// Non-critical image: lazy + async
+<Image
+  src="/gallery-1.jpg"
+  alt="Gallery"
+  width={800}
+  height={600}
+  loading="lazy"
+  decoding="async"
+  quality={65}
+/>
+```
+
+#### Quality Prop (`quality`)
+
+Controls JPEG/WebP compression quality (1-100):
+
+- **`quality={75}`**: Higher quality for important images (logos, hero images, above-the-fold)
+- **`quality={65}`**: Lower quality for non-critical images (gallery, thumbnails, below-the-fold)
+
+✅ **Recommended Strategy**:
+
+```tsx
+// Critical images: higher quality
+<Image
+  src="/company/logo.png"
+  alt="Logo"
+  width={197}
+  height={80}
+  priority
+  quality={75}
+/>
+
+// Non-critical images: lower quality for faster loading
+<Image
+  src="/gallery/image.jpg"
+  alt="Gallery"
+  width={800}
+  height={600}
+  loading="lazy"
+  quality={65}
+/>
+```
+
+#### Priority Prop (`priority`)
+
+Marks image as high priority for preloading:
+
+- **Use `priority`** only for:
+  - Above-the-fold hero images
+  - Logo in navbar/header
+  - Critical LCP (Largest Contentful Paint) images
+- **Limit to 1-2 images per page** (too many defeats the purpose)
+- **Never use `priority`** with `loading="lazy"` (they conflict)
+
+✅ **Correct Usage**:
+
+```tsx
+// Navbar logo - always priority
+<Image
+  src="/logo.png"
+  alt="Logo"
+  width={197}
+  height={80}
+  priority
+  decoding="sync"
+  quality={75}
+/>
+
+// Hero image - priority
+<Image
+  src="/hero.jpg"
+  alt="Hero"
+  fill
+  priority
+  loading="eager"
+  decoding="sync"
+  quality={75}
+/>
+
+// Gallery images - NO priority
+{images.map((img) => (
+  <Image
+    key={img.id}
+    src={img.src}
+    alt={img.alt}
+    width={800}
+    height={600}
+    loading="lazy"
+    decoding="async"
+    quality={65}
+  />
+))}
+```
+
+### Complete Image Optimization Pattern
+
+✅ **Recommended Pattern for Reusable Components**:
+
+```tsx
+type ImageProps = {
+  src: string;
+  alt: string;
+  width: number;
+  height: number;
+  loading?: "eager" | "lazy";
+  priority?: boolean;
+  className?: string;
+};
+
+export function OptimizedImage({
+  src,
+  alt,
+  width,
+  height,
+  loading = "lazy",
+  priority = false,
+  className,
+}: ImageProps) {
+  return (
+    <Image
+      src={src}
+      alt={alt}
+      width={width}
+      height={height}
+      loading={loading}
+      decoding={loading === "eager" || priority ? "sync" : "async"}
+      quality={priority ? 75 : 65}
+      priority={priority}
+      className={className}
+      draggable={false}
+    />
+  );
+}
+```
+
+### Image Loading Checklist
+
+When adding images, ask:
+
+1. **Is it above-the-fold?** → `loading="eager"`, `decoding="sync"`, `quality={75}`
+2. **Is it critical (logo, hero)?** → Add `priority`
+3. **Is it below-the-fold?** → `loading="lazy"`, `decoding="async"`, `quality={65}`
+4. **Is it in a list/grid?** → First 15 `loading="eager"`, rest `loading="lazy"`
+5. **Do you have explicit dimensions?** → Always provide `width` and `height` (or use `fill` with container)
+6. **Is it decorative?** → Consider `loading="lazy"` and lower quality
+
+### Common Mistakes
+
+❌ **Don't**:
+
+```tsx
+// Too many priority images
+<Image priority src="/img1.jpg" />
+<Image priority src="/img2.jpg" />
+<Image priority src="/img3.jpg" />
+
+// Conflicting props
+<Image priority loading="lazy" src="/img.jpg" />
+
+// Missing dimensions
+<Image src="/img.jpg" alt="Image" /> // No width/height
+
+// All images eager
+{images.map(img => (
+  <Image loading="eager" src={img.src} /> // Should be lazy for most
+))}
+```
+
+✅ **Do**:
+
+```tsx
+// Strategic priority usage
+<Image priority src="/hero.jpg" /> // Only 1-2 per page
+<Image loading="lazy" src="/gallery-1.jpg" />
+<Image loading="lazy" src="/gallery-2.jpg" />
+
+// Conditional loading in lists
+{images.map((img, index) => (
+  <Image
+    loading={index < 15 ? "eager" : "lazy"}
+    decoding={index < 15 ? "sync" : "async"}
+    quality={index < 15 ? 75 : 65}
+    src={img.src}
+    width={800}
+    height={600}
+  />
+))}
+```
+
+### Performance Impact
+
+Following these patterns provides:
+
+- ✅ **Faster LCP**: Critical images load immediately
+- ✅ **Reduced bandwidth**: Lower quality for non-critical images
+- ✅ **Better UX**: Progressive loading prevents layout shifts
+- ✅ **Improved Core Web Vitals**: Better LCP, CLS, and FID scores
+
+---
+
+## 9. Turbopack
+
+- Default bundler for dev & prod (`next dev` / `next build`).
+- Use Webpack via:
+
+  ```bash
+  next dev --webpack
+  ```
+
+---
+
+## 10. React 19 / 19.2 Support
+
+- App Router → React 19+
+- Pages Router → React 18 or 19
+- Optional React Compiler:
+
+  ```ts
+  const nextConfig = { reactCompiler: true };
+  export default nextConfig;
+  ```
+
+---
+
+## 11. Miscellaneous
+
+- Node ≥ 20.9 required.
+- TypeScript ≥ 5.1.
+- `runtime = "experimental-edge"` → `runtime = "edge"`.
+- `revalidateTag('tag')` single-arg form is **deprecated**.
+- AMP support fully removed.
+- `next lint` removed; use **ESLint/biome** directly.
+
+---
+
+## 12. Recommended `next.config.ts` baseline
+
+```ts
+import type { NextConfig } from "next";
+
+const nextConfig: NextConfig = {
+  cacheComponents: true, // new caching model
+  reactCompiler: false, // enable if using Babel compiler
+  turbopack: true, // default bundler
+  experimental: {
+    after: true, // enable unstable_after
+    turbopackFileSystemCacheForDev: true,
+  },
+};
+
+export default nextConfig;
+```
+
+---
+
+## 13. Migration Sanity Checks
+
+✅ Replace all `middleware.ts` → `proxy.ts`
+✅ Replace sync cookie/header access with `await`
+✅ Ensure `params` and `searchParams` use `await`
+✅ Update `revalidateTag()` signatures
+✅ Verify Node 20+ and TS 5+
+✅ Remove AMP / next lint configs
+✅ Test Turbopack locally (`next dev --turbo`)
+✅ Enable `cacheComponents: true` for new caching model
+✅ Replace `dynamic = 'force-static'` with `'use cache'` (in async components/functions only)
+✅ Replace `revalidate` with `cacheLife()` inside `'use cache'`
+✅ Ensure components/functions using `'use cache'` are marked as `async`
+✅ Wrap dynamic/runtime data in `<Suspense>` boundaries
+✅ Optimize images: Add `loading`, `decoding`, and `quality` props
+✅ Use `priority` only for 1-2 critical images per page (logo, hero)
+✅ Set first 15 images in lists/grids to `loading="eager"`, rest to `loading="lazy"`
+✅ Match `decoding="sync"` with `loading="eager"` for critical images
+✅ Use `quality={75}` for critical images, `quality={65}` for others

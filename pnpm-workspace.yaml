@@ -1,0 +1,6 @@
+packages:
+  - shared
+  - website
+  - mobile
+
+nodeLinker: isolated

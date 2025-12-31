@@ -1,0 +1,71 @@
+---
+description: Apply when styling components or working with colors. Always use colors from shared/constants/theme.css via Tailwind (Web) or NativeWind (Mobile) classes.
+alwaysApply: false
+---
+
+# Color Styling Rules
+
+## Primary Rule: Always Use Colors from shared/constants/theme.css
+
+**NEVER use hardcoded colors, hex values, or direct CSS color values in components.** Always use the colors defined in `shared/constants/theme.css` via Tailwind utility classes.
+
+## Usage Pattern
+
+✅ **CORRECT:**
+
+```tsx
+// Use direct Tailwind classes from theme.css
+<div className="bg-background text-foreground">
+  <p className="text-foreground-secondary">Secondary text</p>
+  <button className="bg-brand text-foreground">Brand button</button>
+  <div className="border-destructive bg-destructive/10 text-destructive">
+    Error message
+  </div>
+  <div className="text-success bg-success/20 border-success">
+    Success message
+  </div>
+  <div className="text-warning bg-warning/20">Warning message</div>
+</div>
+```
+
+❌ **INCORRECT:**
+
+```tsx
+// Don't use hardcoded colors
+<div className="bg-white text-black">
+<div style={{ color: '#000000' }}>
+<div className="text-[#000000]">
+
+// Don't use colors that aren't defined in shared/constants/theme.css
+// Check theme.css to see what colors are available
+```
+
+## Opacity/Transparency
+
+You can use Tailwind opacity modifiers with these colors:
+
+```tsx
+<div className="bg-brand/20 border-brand/60 text-foreground/80">
+<div className="bg-success/10 text-success/90">
+<div className="border-destructive/50 bg-destructive/5">
+```
+
+## Theme Awareness
+
+All colors in `shared/constants/theme.css` are theme-aware and automatically support light/dark mode. The CSS variables are defined for both `:root` (light mode) and `.dark` (dark mode), so Tailwind classes automatically adapt to the current theme.
+
+## When to Use This Rule
+
+- When adding new components or styling existing ones
+- When choosing colors for text, backgrounds, borders, or any visual elements
+- When creating new UI components or modifying existing ones
+- When working with Tailwind classes that involve colors
+
+## Notes
+
+- Colors are defined in `shared/constants/theme.css` as CSS variables
+- The `@theme` directive in `theme.css` maps these CSS variables to Tailwind utilities (e.g., `--color-success: var(--success)` enables `text-success`, `bg-success`, etc.)
+- `theme.css` is imported in `website/app/globals.css`
+- Always check `shared/constants/theme.css` to see what colors are available - the color list may change over time
+- Only use colors that exist in `theme.css`
+- If you need a new color, add it to `theme.css` first (both `:root` and `.dark` selectors), then add it to the `@theme` block, then use it via Tailwind classes
