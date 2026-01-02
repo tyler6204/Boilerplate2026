@@ -2,6 +2,7 @@ import { NativeTabs, NativeTabTrigger, NativeTabsTriggerLabel, NativeTabsTrigger
 import { useThemeColor } from '@/hooks/use-theme-color';
 
 export default function TabLayout() {
+  const backgroundColor = useThemeColor({}, 'background');
   const tintColor = useThemeColor({}, 'brand');
   const tabSelectedColor = useThemeColor({}, 'tabSelected');
 
@@ -10,6 +11,8 @@ export default function TabLayout() {
       tintColor={tintColor}
       indicatorColor={tabSelectedColor} // Android indicator color
       rippleColor={tabSelectedColor}
+      backgroundColor={backgroundColor}
+      shadowColor="transparent"
     >
       <NativeTabTrigger name="home">
         <NativeTabsTriggerIcon
@@ -24,6 +27,13 @@ export default function TabLayout() {
           md="help_outline"
         />
         <NativeTabsTriggerLabel>FAQ</NativeTabsTriggerLabel>
+      </NativeTabTrigger>
+      <NativeTabTrigger name="native-view">
+        <NativeTabsTriggerIcon
+          sf={{ default: 'square.stack.3d.up', selected: 'square.stack.3d.up.fill' }}
+          md="view_module"
+        />
+        <NativeTabsTriggerLabel>Native View</NativeTabsTriggerLabel>
       </NativeTabTrigger>
     </NativeTabs>
   );

@@ -1,3 +1,4 @@
+
 ---
 description: Apply when styling mobile components or working with colors, fonts, and NativeWind classes. Always use colors from shared/constants/theme.css via NativeWind classes and theme parsing utilities.
 alwaysApply: false

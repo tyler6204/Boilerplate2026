@@ -1,75 +1,92 @@
-import * as TablerIcons from '@tabler/icons-react-native';
-import { MaterialIcons } from '@expo/vector-icons';
-import { ComponentType } from 'react';
-import type { SvgProps } from 'react-native-svg';
+import * as TablerIcons from "@tabler/icons-react-native";
+import { MaterialIcons } from "@expo/vector-icons";
+import { ComponentType } from "react";
+import type { SvgProps } from "react-native-svg";
 
-export type TablerIconComponent = ComponentType<SvgProps & { size?: string | number; strokeWidth?: string | number }>;
+export type TablerIconComponent = ComponentType<
+  SvgProps & { size?: string | number; strokeWidth?: string | number }
+>;
 
-export type IconMapping = Record<string, {
-  tabler?: TablerIconComponent;
-  material?: keyof typeof MaterialIcons.glyphMap;
-}>;
+export type IconMapping = Record<
+  string,
+  {
+    tabler?: TablerIconComponent;
+    material?: keyof typeof MaterialIcons.glyphMap;
+  }
+>;
 
 /**
  * Icon mapping configuration.
- * 
+ *
  * Add your SF Symbols to icon mappings here.
  * - see Tabler Icons at https://tabler.io/icons
  * - see Material Icons at https://icons.expo.fyi/
  * - see SF Symbols in the [SF Symbols](https://developer.apple.com/sf-symbols/) app.
  */
 export const ICON_MAPPING: IconMapping = {
-  'house': {
+  house: {
     tabler: TablerIcons.IconHome,
-    material: 'home',
+    material: "home",
   },
-  'house.fill': {
+  "house.fill": {
     tabler: TablerIcons.IconHomeFilled,
-    material: 'home',
+    material: "home",
   },
-  'questionmark.circle': {
+  "questionmark.circle": {
     tabler: TablerIcons.IconHelpCircle,
-    material: 'help-outline',
+    material: "help-outline",
   },
-  'questionmark.circle.fill': {
+  "questionmark.circle.fill": {
     tabler: TablerIcons.IconHelpCircleFilled,
-    material: 'help',
+    material: "help",
   },
-  'atom': {
+  atom: {
     tabler: TablerIcons.IconAtom,
-    material: 'science',
+    material: "science",
   },
-  'iphone': {
+  iphone: {
     tabler: TablerIcons.IconDeviceMobile,
-    material: 'smartphone',
+    material: "smartphone",
   },
-  'server.rack': {
+  "server.rack": {
     tabler: TablerIcons.IconServer,
-    material: 'dns',
+    material: "dns",
   },
-  'checkmark.circle.fill': {
+  "checkmark.circle.fill": {
     tabler: TablerIcons.IconCircleCheckFilled,
-    material: 'check-circle',
+    material: "check-circle",
   },
-  'terminal': {
+  terminal: {
     tabler: TablerIcons.IconTerminal2,
-    material: 'terminal',
+    material: "terminal",
   },
-  'chevron.right': {
+  "chevron.right": {
     tabler: TablerIcons.IconChevronRight,
-    material: 'chevron-right',
+    material: "chevron-right",
   },
-  'chevron.down': {
+  "chevron.down": {
     tabler: TablerIcons.IconChevronDown,
-    material: 'keyboard-arrow-down',
+    material: "keyboard-arrow-down",
   },
-  'plus': {
+  plus: {
     tabler: TablerIcons.IconPlus,
-    material: 'add',
+    material: "add",
   },
-  'minus': {
+  minus: {
     tabler: TablerIcons.IconMinus,
-    material: 'remove',
+    material: "remove",
+  },
+  "face.smiling": {
+    tabler: TablerIcons.IconMoodEmpty,
+    material: "sentiment-neutral",
+  },
+  magnifyingglass: {
+    tabler: TablerIcons.IconSearch,
+    material: "search",
+  },
+  ellipsis: {
+    tabler: TablerIcons.IconDots,
+    material: "more-horiz",
   },
 };
 

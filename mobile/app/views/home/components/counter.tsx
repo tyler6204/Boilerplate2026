@@ -7,7 +7,7 @@ import { GlassView } from "@/components/glass-view";
 import { IconSymbol } from "@/components/native/icon";
 import Button from "@/components/native/button";
 
-export function Counter() {
+export default function CounterView() {
   let count = useQuery(api.counter.get);
   const increment = useMutation(api.counter.increment);
   const decrement = useMutation(api.counter.decrement);

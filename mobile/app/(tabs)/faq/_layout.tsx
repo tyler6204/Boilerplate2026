@@ -1,14 +1,13 @@
-import { Stack } from 'expo-router';
-import { Platform } from 'react-native';
+import { Stack, StackHeader, StackHeaderTitle, StackHeaderSearchBar } from 'expo-router';
+import { useDefaultScreenOptions, useHeaderStyle } from '@/lib/create-header';
 
-export default function FAQLayout() {
+export default function HomeLayout() {
   return (
-    <Stack
-      screenOptions={{
-        headerShown: true,
-        headerTransparent: Platform.OS === 'ios',
-        title: 'FAQ',
-      }}
-    />
+    <Stack screenOptions={{ ...useDefaultScreenOptions() }} >
+      <StackHeader style={useHeaderStyle()}>
+        <StackHeaderTitle>FAQ</StackHeaderTitle>
+        <StackHeaderSearchBar hideWhenScrolling={false} placeholder="Search"/>
+      </StackHeader>
+    </Stack>
   );
 }

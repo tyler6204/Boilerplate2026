@@ -4,8 +4,7 @@ import { Text } from "@/components/native/text";
 import { IconSymbol } from '@/components/native/icon';
 import { GlassView } from '@/components/glass-view';
 import { BOILERPLATE_DESCRIPTION, TECH_STACK_ITEMS, SECTION_TITLES } from "@shared/constants/boilerplate";
-import { Counter } from "@/app/views/home/components/counter";
-// Example: Accessing environment variables
+import CounterView from "@/app/views/home/components/counter";
 // Client-side env vars must be prefixed with EXPO_PUBLIC_
 const appName = process.env.EXPO_PUBLIC_APP_NAME || "ENV NOT SET";
 const version = process.env.EXPO_PUBLIC_VERSION || "ENV NOT SET";
@@ -35,7 +34,7 @@ export default function HomeView() {
         <Text className="text-center font-body text-foreground-secondary">
           {BOILERPLATE_DESCRIPTION}
         </Text>
-        <Counter />
+        <CounterView />
       </View>
 
       {/* Tech Stack */}
@@ -60,6 +59,7 @@ export default function HomeView() {
           ))}
         </View>
       </View>
+
 
       {/* Developer Experience */}
       <View className="gap-4 mb-8">
