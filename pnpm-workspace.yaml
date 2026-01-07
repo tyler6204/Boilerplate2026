@@ -1,6 +1,4 @@
 packages:
-  - shared
-  - website
-  - mobile
-
-nodeLinker: isolated
+  - "apps/*"
+  - "packages/*"
+  - "services/*"

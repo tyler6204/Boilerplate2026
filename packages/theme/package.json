@@ -1,0 +1,27 @@
+{
+  "name": "@repo/theme",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./index.ts",
+  "types": "./index.ts",
+  "exports": {
+    ".": {
+      "types": "./index.ts",
+      "import": "./index.ts",
+      "require": "./index.ts",
+      "default": "./index.ts"
+    },
+    "./theme.css": {
+      "style": "./theme.css",
+      "default": "./theme.css"
+    },
+    "./theme.mobile.css": {
+      "style": "./theme.mobile.css",
+      "default": "./theme.mobile.css"
+    },
+    "./lib/*": "./lib/*.ts"
+  },
+  "peerDependencies": {
+    "react": ">=18"
+  }
+}

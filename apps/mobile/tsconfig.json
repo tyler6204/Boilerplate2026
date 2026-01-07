@@ -1,0 +1,34 @@
+{
+  "extends": "./node_modules/expo/tsconfig.base.json",
+  "compilerOptions": {
+    "strict": true,
+    "baseUrl": ".",
+    "paths": {
+      "@/*": [
+        "./*"
+      ],
+      "@repo/theme": [
+        "../../packages/theme/index.ts"
+      ],
+      "@repo/theme/*": [
+        "../../packages/theme/*"
+      ],
+      "@repo/constants": [
+        "../../packages/constants/boilerplate.ts"
+      ],
+      "@repo/types/*": [
+        "../../packages/types/*"
+      ],
+      "@repo/convex/*": [
+        "../../services/convex/*"
+      ]
+    }
+  },
+  "include": [
+    "**/*.ts",
+    "**/*.tsx",
+    ".expo/types/**/*.ts",
+    "expo-env.d.ts",
+    "uniwind-types.d.ts"
+  ]
+}

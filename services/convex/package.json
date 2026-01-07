@@ -1,0 +1,9 @@
+{
+  "name": "@repo/convex",
+  "version": "0.0.0",
+  "private": true,
+  "exports": {
+    "./*": "./*.ts",
+    "./_generated/*": "./_generated/*.js"
+  }
+}

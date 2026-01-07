@@ -235,7 +235,7 @@ Uses Tailwind CSS with a shared theme system. Colors and design tokens are defin
 
 ### Mobile (Expo)
 
-Uses NativeWind (Tailwind for React Native) with the same shared theme system for consistency across platforms.
+Uses Uniwind (Tailwind for React Native) with the same shared theme system for consistency across platforms.
 
 ## 🔧 Configuration
 
@@ -312,7 +312,6 @@ Contributions are welcome! Please follow these steps:
 - [Expo Documentation](https://docs.expo.dev/)
 - [Convex Documentation](https://docs.convex.dev/)
 - [Tailwind CSS Documentation](https://tailwindcss.com/docs)
-- [NativeWind Documentation](https://www.nativewind.dev/)
 
 ## 🐛 Troubleshooting
 

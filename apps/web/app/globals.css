@@ -1,0 +1,20 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "@repo/theme/theme.css";
+
+/* Tell Tailwind to scan monorepo packages for classes */
+@source "../../../packages/ui/src";
+@source "../../../packages/theme";
+
+@custom-variant dark (&:is(.dark *));
+
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
