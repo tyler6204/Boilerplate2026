@@ -40,10 +40,10 @@ export function Footer({ appName }: FooterProps) {
         <div className="xl:grid xl:grid-cols-3 xl:gap-8">
           {/* Brand */}
           <div className="space-y-4">
-            <Link href="/" className="text-xl font-semibold tracking-tight">
+            <Link href="/" className="font-title3 font-semibold tracking-tight">
               {appName}
             </Link>
-            <p className="text-sm text-foreground/50 max-w-xs leading-6">
+            <p className="font-footnote text-foreground/50 max-w-xs leading-6">
               Ship faster. Build better. The toolkit that gets out of your way.
             </p>
           </div>
@@ -52,13 +52,13 @@ export function Footer({ appName }: FooterProps) {
           <div className="mt-12 grid grid-cols-2 gap-8 xl:col-span-2 xl:mt-0">
             <div className="md:grid md:grid-cols-2 md:gap-8">
               <div>
-                <h3 className="text-sm font-semibold">Product</h3>
+                <h3 className="font-footnote font-semibold">Product</h3>
                 <ul role="list" className="mt-4 space-y-3">
                   {FOOTER_LINKS.Product.map((link) => (
                     <li key={link.name}>
                       <Link
                         href={link.href}
-                        className="text-sm text-foreground/50 hover:text-foreground transition-colors"
+                        className="font-footnote text-foreground/50 hover:text-foreground transition-colors"
                       >
                         {link.name}
                       </Link>
@@ -67,13 +67,13 @@ export function Footer({ appName }: FooterProps) {
                 </ul>
               </div>
               <div className="mt-10 md:mt-0">
-                <h3 className="text-sm font-semibold">Company</h3>
+                <h3 className="font-footnote font-semibold">Company</h3>
                 <ul role="list" className="mt-4 space-y-3">
                   {FOOTER_LINKS.Company.map((link) => (
                     <li key={link.name}>
                       <Link
                         href={link.href}
-                        className="text-sm text-foreground/50 hover:text-foreground transition-colors"
+                        className="font-footnote text-foreground/50 hover:text-foreground transition-colors"
                       >
                         {link.name}
                       </Link>
@@ -84,13 +84,13 @@ export function Footer({ appName }: FooterProps) {
             </div>
             <div className="md:grid md:grid-cols-2 md:gap-8">
               <div>
-                <h3 className="text-sm font-semibold">Resources</h3>
+                <h3 className="font-footnote font-semibold">Resources</h3>
                 <ul role="list" className="mt-4 space-y-3">
                   {FOOTER_LINKS.Resources.map((link) => (
                     <li key={link.name}>
                       <Link
                         href={link.href}
-                        className="text-sm text-foreground/50 hover:text-foreground transition-colors"
+                        className="font-footnote text-foreground/50 hover:text-foreground transition-colors"
                       >
                         {link.name}
                       </Link>
@@ -99,13 +99,13 @@ export function Footer({ appName }: FooterProps) {
                 </ul>
               </div>
               <div className="mt-10 md:mt-0">
-                <h3 className="text-sm font-semibold">Legal</h3>
+                <h3 className="font-footnote font-semibold">Legal</h3>
                 <ul role="list" className="mt-4 space-y-3">
                   {FOOTER_LINKS.Legal.map((link) => (
                     <li key={link.name}>
                       <Link
                         href={link.href}
-                        className="text-sm text-foreground/50 hover:text-foreground transition-colors"
+                        className="font-footnote text-foreground/50 hover:text-foreground transition-colors"
                       >
                         {link.name}
                       </Link>
@@ -119,7 +119,7 @@ export function Footer({ appName }: FooterProps) {
 
         {/* Bottom */}
         <div className="mt-12 border-t border-border pt-8">
-          <p className="text-sm text-foreground/40">
+          <p className="font-footnote text-foreground/40">
             &copy; {new Date().getFullYear()} {appName}. All rights reserved.
           </p>
         </div>

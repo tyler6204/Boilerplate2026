@@ -1,8 +1,8 @@
 "use client";
 
 import { useTheme } from "next-themes";
-import { useEffect, useState } from "react";
-import { IconSun, IconMoon, IconDeviceDesktop, IconChristmasTree } from "@tabler/icons-react";
+import { useEffect, useState, startTransition } from "react";
+import { IconSun, IconMoon, IconDeviceDesktop } from "@tabler/icons-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import {
@@ -15,7 +15,6 @@ import {
 const THEME_OPTIONS = [
   { value: "light", label: "Light", icon: IconSun, emoji: "☀️" },
   { value: "dark", label: "Dark", icon: IconMoon, emoji: "🌙" },
-  { value: "christmas", label: "Christmas", icon: IconChristmasTree, emoji: "🎄" },
   { value: "system", label: "System", icon: IconDeviceDesktop, emoji: "💻" },
 ] as const;
 
@@ -28,7 +27,9 @@ export function ThemeDropdown() {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    setMounted(true);
+    startTransition(() => {
+      setMounted(true);
+    });
   }, []);
 
   if (!mounted) {

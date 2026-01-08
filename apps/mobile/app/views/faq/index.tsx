@@ -1,11 +1,11 @@
 import { ThemedScrollView } from '@/components/scroll-view';
 import { View } from '@/components/view';
-import { Text } from "@/components/native/text";
-import { Collapsible } from '@/components/collapsible';
-import { EmptyState } from '@/components/empty-state';
+import { Text } from "@/components/ui/text";
+import { EmptyState } from '@/components/ui/empty';
 import { FAQS } from "@repo/constants";
 import { useNavigation } from "@react-navigation/native"
 import { useLayoutEffect, useState, useRef } from 'react';
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 
 import type { SearchBarProps } from 'react-native-screens';
 export default function FAQTab() {
@@ -37,13 +37,26 @@ export default function FAQTab() {
     <ThemedScrollView showsVerticalScrollIndicator={false} contentContainerClassName="p-4 gap-8">
       <View className="gap-4">
         {filteredFaqs.length > 0 ? (
-          filteredFaqs.map((faq, index) => (
-            <Collapsible key={index} title={faq.title} defaultOpen={index === 0 && query.length === 0}>
-              <Text className="font-callout ">
-                {faq.description}
-              </Text>
-            </Collapsible>
-          ))
+          <Accordion
+            type="single"
+            collapsible
+            defaultValue={query.length === 0 ? "0" : undefined}
+          >
+            {filteredFaqs.map((faq, index) => (
+              <AccordionItem key={index} value={String(index)}>
+                <AccordionTrigger className='text-red-500'>
+                  <Text className="font-medium text-left flex-1">
+                    {faq.title}
+                  </Text>
+                </AccordionTrigger>
+                <AccordionContent>
+                  <Text>
+                    {faq.description}
+                  </Text>
+                </AccordionContent>
+              </AccordionItem>
+            ))}
+          </Accordion>
         ) : (
           <EmptyState
             title="No results found"

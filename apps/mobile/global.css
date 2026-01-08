@@ -1,6 +1,4 @@
 @import "tailwindcss";
 @import "uniwind";
 @import "@repo/theme/theme.mobile.css";
-
-/* Include packages from monorepo */
-@source "../../packages";
+@import "@repo/theme/globals.css";

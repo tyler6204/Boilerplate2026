@@ -1,5 +1,6 @@
 import { ScrollView, type ScrollViewProps } from 'react-native';
 import { cn } from '@/lib/utils';
+import { useResolveClassNames } from 'uniwind';
 
 export type ThemedScrollViewProps = ScrollViewProps & {
   className?: string;
@@ -14,9 +15,10 @@ export function ThemedScrollView({
   contentContainerClassName,
   ...otherProps
 }: ThemedScrollViewProps) {
+  const resolvedClassNames = useResolveClassNames(cn("bg-background", className ?? ''));
   return (
     <ScrollView
-      className={cn("bg-background", className)}
+      style={resolvedClassNames}
       contentContainerClassName={contentContainerClassName}
       {...otherProps}
     >

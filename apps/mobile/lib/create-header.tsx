@@ -1,12 +1,12 @@
 import { ColorValue, Platform } from 'react-native';
-import { useThemeColor } from '@/hooks/use-theme-color';
+import { useTailwindToHex } from '../hooks/useTailwindToHex';
 
 export function useDefaultScreenOptions() {
   const isIOS = Platform.OS === 'ios';
   const iosVersion = isIOS ? parseFloat(Platform.Version as string) : 0;
   const isIOSGreaterThan26 = isIOS && iosVersion >= 26;
-  const foregroundColor = useThemeColor({}, 'foreground');
-  const backgroundColor = useThemeColor({}, 'background');
+  const foregroundColor = useTailwindToHex('primary');
+  const backgroundColor = useTailwindToHex('background');
 
   return {
     headerShown: false,
@@ -21,7 +21,7 @@ export function useDefaultScreenOptions() {
 }
 
 export function useHeaderStyle(tintColor: string | undefined = undefined) {
-  const defaultTintColor = useThemeColor({}, 'brand');
+  const defaultTintColor = useTailwindToHex('primary');
   const effectiveTintColor = tintColor ?? defaultTintColor;
   return {
     shadowColor: 'transparent' as undefined | 'transparent',

@@ -1,0 +1,39 @@
+/* ===========================================
+   FONT SIZE UTILITIES (SwiftUI-style)
+   =========================================== */
+@layer utilities {
+  .font-large-title {
+    font-size: 34px;
+  }
+  .font-title {
+    font-size: 28px;
+  }
+  .font-title2 {
+    font-size: 22px;
+  }
+  .font-title3 {
+    font-size: 20px;
+  }
+  .font-headline {
+    font-size: 17px;
+    font-weight: 600;
+  }
+  .font-body {
+    font-size: 17px;
+  }
+  .font-callout {
+    font-size: 16px;
+  }
+  .font-subheadline {
+    font-size: 15px;
+  }
+  .font-footnote {
+    font-size: 13px;
+  }
+  .font-caption {
+    font-size: 12px;
+  }
+  .font-caption2 {
+    font-size: 11px;
+  }
+}

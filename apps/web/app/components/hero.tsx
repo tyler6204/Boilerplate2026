@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { ArrowRight } from "lucide-react";
+import { IconArrowRight } from "@tabler/icons-react";
 
 interface HeroProps {
   appName: string;
@@ -28,17 +28,17 @@ export function Hero({ appName }: HeroProps) {
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="mx-auto max-w-3xl text-center">
           {/* Eyebrow */}
-          <p className="text-sm font-medium text-brand mb-6 tracking-wide uppercase">
+          <p className="font-footnote font-medium text-brand mb-6 tracking-wide uppercase">
             Now available on iOS & Android
           </p>
 
           {/* Main headline */}
-          <h1 className="text-4xl font-bold tracking-tight sm:text-6xl lg:text-7xl text-balance">
+          <h1 className="font-large-title font-bold tracking-tight sm:text-6xl lg:text-7xl text-balance">
             Build products people actually want to use
           </h1>
 
           {/* Subheadline */}
-          <p className="mt-6 text-lg leading-8 text-foreground/60 max-w-2xl mx-auto text-balance">
+          <p className="mt-6 font-body leading-8 text-foreground/60 max-w-2xl mx-auto text-balance">
             Stop wrestling with complexity. {appName} gives you the foundation to ship fast,
             iterate faster, and focus on what matters—your users.
           </p>
@@ -47,18 +47,18 @@ export function Hero({ appName }: HeroProps) {
           <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
             <Button
               size="lg"
-              className="h-12 px-8 bg-foreground text-background hover:bg-foreground/90 text-base font-medium"
+              className="h-12 px-8 bg-foreground text-background hover:bg-foreground/90 font-callout font-medium"
               asChild
             >
               <Link href="#cta">
                 Start free trial
-                <ArrowRight className="ml-2 size-4" />
+                <IconArrowRight className="ml-2 size-4" />
               </Link>
             </Button>
             <Button
               size="lg"
               variant="ghost"
-              className="h-12 px-8 text-base font-medium text-foreground/70 hover:text-foreground"
+              className="h-12 px-8 font-callout font-medium text-foreground/70 hover:text-foreground"
               asChild
             >
               <Link href="#features">See how it works</Link>
@@ -66,7 +66,7 @@ export function Hero({ appName }: HeroProps) {
           </div>
 
           {/* Social proof */}
-          <p className="mt-12 text-sm text-foreground/40">
+          <p className="mt-12 font-footnote text-foreground/40">
             Trusted by 10,000+ teams worldwide
           </p>
 
@@ -75,7 +75,7 @@ export function Hero({ appName }: HeroProps) {
             {["Vercel", "Stripe", "Linear", "Notion", "Figma"].map((company) => (
               <span
                 key={company}
-                className="text-sm font-semibold tracking-tight text-foreground/60"
+                className="font-footnote font-semibold tracking-tight text-foreground/60"
               >
                 {company}
               </span>

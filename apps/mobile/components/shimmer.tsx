@@ -1,5 +1,4 @@
-import { useThemeColor } from "@/hooks/use-theme-color";
-import { hexWithAlpha } from "@repo/theme/lib/colors";
+import { useTailwindToHex } from "@/hooks/useTailwindToHex";
 import MaskedView from "@react-native-masked-view/masked-view";
 import { LinearGradient } from "expo-linear-gradient";
 import { ReactNode, useEffect, useState } from "react";
@@ -27,8 +26,12 @@ export function Shimmer({
   shimmerWidthRatio = 0.4,
   delay = 0
 }: ShimmerProps) {
-  const themeTintColor = useThemeColor({}, 'brand');
-  const effectiveTintColor = tintColor ?? themeTintColor;
+  const themeTintColor = useTailwindToHex('primary');
+  // If tintColor is provided, it's a Tailwind color name; otherwise use the resolved theme color
+  const tintColorName = tintColor ?? 'primary';
+  const gradientColor1 = useTailwindToHex(tintColorName, 0.2) ?? '';
+  const gradientColor2 = tintColor ? tintColor : (themeTintColor ?? '');
+  const gradientColor3 = useTailwindToHex(tintColorName, 0.2) ?? '';
   const shimmerPosition = useSharedValue(-1);
   const [layout, setLayout] = useState<{ width: number; height: number } | null>(null);
 
@@ -100,7 +103,7 @@ export function Shimmer({
             {/* Animated gradient - masked to children shapes */}
             <Animated.View style={[shimmerStyle, styles.shimmerGradient]}>
               <LinearGradient
-                colors={[hexWithAlpha(effectiveTintColor, 0.2), effectiveTintColor, hexWithAlpha(effectiveTintColor, 0.2)]}
+                colors={[gradientColor1, gradientColor2, gradientColor3]}
                 start={{ x: 0, y: 0 }}
                 end={{ x: 1, y: 0 }}
                 style={StyleSheet.absoluteFill}

@@ -66,10 +66,10 @@ export function Testimonials() {
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         {/* Section header */}
         <div className="mx-auto max-w-2xl text-center">
-          <p className="text-sm font-medium text-brand tracking-wide uppercase">
+          <p className="font-footnote font-medium text-brand tracking-wide uppercase">
             Testimonials
           </p>
-          <h2 className="mt-2 text-3xl font-bold tracking-tight sm:text-4xl text-balance">
+          <h2 className="mt-2 font-title font-bold tracking-tight sm:text-4xl text-balance">
             Used by teams who ship
           </h2>
         </div>
@@ -82,17 +82,17 @@ export function Testimonials() {
               className="rounded-2xl bg-background p-6 ring-1 ring-border"
             >
               <blockquote className="text-foreground/80">
-                <p className="text-base leading-7">"{testimonial.body}"</p>
+                <p className="font-callout leading-7">"{testimonial.body}"</p>
               </blockquote>
               <figcaption className="mt-6 flex items-center gap-x-4">
                 <div className="size-10 rounded-full bg-foreground/10 flex items-center justify-center">
-                  <span className="text-sm font-medium text-foreground/60">
+                  <span className="font-footnote font-medium text-foreground/60">
                     {testimonial.author.name.charAt(0)}
                   </span>
                 </div>
                 <div>
-                  <div className="text-sm font-semibold">{testimonial.author.name}</div>
-                  <div className="text-sm text-foreground/50">{testimonial.author.company}</div>
+                  <div className="font-footnote font-semibold">{testimonial.author.name}</div>
+                  <div className="font-footnote text-foreground/50">{testimonial.author.company}</div>
                 </div>
               </figcaption>
             </figure>

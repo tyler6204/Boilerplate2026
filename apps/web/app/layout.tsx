@@ -1,6 +1,5 @@
 import "./globals.css";
 import { Metadata } from 'next'
-import { Toaster } from "@/components/ui/sonner"
 import { TopLoader } from "@/components/top-loader"
 import { Inter, JetBrains_Mono } from "next/font/google";
 import { ThemeProvider } from 'next-themes'
@@ -22,11 +21,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <ThemeProvider
             attribute="class"
             defaultTheme="system"
-            themes={["light", "dark", "christmas"]}
+            themes={["light", "dark"]}
             enableSystem
           >
             <TopLoader />
-            <Toaster />
             {children}
           </ThemeProvider>
         </ConvexClientProvider>

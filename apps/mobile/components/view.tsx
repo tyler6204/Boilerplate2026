@@ -33,7 +33,7 @@ export function ThemedView({
 
 export function View({ children, style, className, ...otherProps }: ViewProps & { className?: string }) {
   return (
-    <ReactNativeView className={className} style={style} {...otherProps}>
+    <ReactNativeView className={className}>
       {children}
     </ReactNativeView>
   );

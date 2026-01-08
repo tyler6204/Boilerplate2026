@@ -1,5 +1,5 @@
 import { ThemedView } from '@/components/view';
-import { EmptyState } from '@/components/empty-state';
+import { EmptyState } from '@/components/ui/empty';
 
 export default function ExampleModalView() {
   return (

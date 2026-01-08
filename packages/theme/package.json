@@ -19,6 +19,14 @@
       "style": "./theme.mobile.css",
       "default": "./theme.mobile.css"
     },
+    "./theme.web.css": {
+      "style": "./theme.web.css",
+      "default": "./theme.web.css"
+    },
+    "./globals.css": {
+      "style": "./globals.css",
+      "default": "./globals.css"
+    },
     "./lib/*": "./lib/*.ts"
   },
   "peerDependencies": {

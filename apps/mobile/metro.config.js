@@ -16,9 +16,10 @@ const config = getDefaultConfig(__dirname);
 const workspaceRoot = resolve(__dirname, "../..");
 const convexRoot = resolve(workspaceRoot, "services/convex");
 
-// Watch all folders in the monorepo that contain code we depend on
+// Watch only the folders we actually depend on (not the whole monorepo)
 config.watchFolders = [
-  workspaceRoot, // Watch entire monorepo for changes in packages/*
+  resolve(workspaceRoot, "packages"),
+  resolve(workspaceRoot, "services"),
 ];
 
 // Add path alias resolution for Metro bundler
@@ -43,5 +44,5 @@ config.resolver = {
 module.exports = withUniwindConfig(config, {
   cssEntryFile: "./global.css",
   dtsFile: "./uniwind-types.d.ts",
-  extraThemes: ["christmas"],
+  extraThemes: [],
 });
