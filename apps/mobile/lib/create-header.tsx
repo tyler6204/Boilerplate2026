@@ -22,9 +22,11 @@ export function useDefaultScreenOptions() {
 
 export function useHeaderStyle(tintColor: string | undefined = undefined) {
   const defaultTintColor = useTailwindToHex('primary');
+  const backgroundColor = useTailwindToHex('background');
   const effectiveTintColor = tintColor ?? defaultTintColor;
   return {
     shadowColor: 'transparent' as undefined | 'transparent',
     color: effectiveTintColor as ColorValue,
+    backgroundColor: backgroundColor as ColorValue,
   };
 }

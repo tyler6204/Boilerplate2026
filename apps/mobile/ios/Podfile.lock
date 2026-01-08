@@ -1512,6 +1512,28 @@ PODS:
     - React-RCTFBReactNativeSpec
     - ReactCommon/turbomodule/core
     - ReactNativeDependencies
+  - react-native-date-picker (5.0.13):
+    - hermes-engine
+    - RCTRequired
+    - RCTTypeSafety
+    - React-Core
+    - React-Core-prebuilt
+    - React-debug
+    - React-Fabric
+    - React-featureflags
+    - React-graphics
+    - React-ImageManager
+    - React-jsi
+    - React-NativeModulesApple
+    - React-RCTFabric
+    - React-renderercss
+    - React-rendererdebug
+    - React-utils
+    - ReactCodegen
+    - ReactCommon/turbomodule/bridging
+    - ReactCommon/turbomodule/core
+    - ReactNativeDependencies
+    - Yoga
   - react-native-safe-area-context (5.6.2):
     - hermes-engine
     - RCTRequired
@@ -2152,7 +2174,7 @@ PODS:
     - ReactCommon/turbomodule/core
     - ReactNativeDependencies
     - Yoga
-  - RNSVG (15.12.1):
+  - RNSVG (15.15.1):
     - hermes-engine
     - RCTRequired
     - RCTTypeSafety
@@ -2173,9 +2195,9 @@ PODS:
     - ReactCommon/turbomodule/bridging
     - ReactCommon/turbomodule/core
     - ReactNativeDependencies
-    - RNSVG/common (= 15.12.1)
+    - RNSVG/common (= 15.15.1)
     - Yoga
-  - RNSVG/common (15.12.1):
+  - RNSVG/common (15.15.1):
     - hermes-engine
     - RCTRequired
     - RCTTypeSafety
@@ -2344,6 +2366,7 @@ DEPENDENCIES:
   - "React-logger (from `../../../node_modules/.pnpm/react-native@0.83.1_@babel+core@7.28.5_@types+react@19.1.17_react@19.2.0/node_modules/react-native/ReactCommon/logger`)"
   - "React-Mapbuffer (from `../../../node_modules/.pnpm/react-native@0.83.1_@babel+core@7.28.5_@types+react@19.1.17_react@19.2.0/node_modules/react-native/ReactCommon`)"
   - "React-microtasksnativemodule (from `../../../node_modules/.pnpm/react-native@0.83.1_@babel+core@7.28.5_@types+react@19.1.17_react@19.2.0/node_modules/react-native/ReactCommon/react/nativemodule/microtasks`)"
+  - "react-native-date-picker (from `../../../node_modules/.pnpm/react-native-date-picker@5.0.13_react-native@0.83.1_@babel+core@7.28.5_@types+react@19.1.17_react@19.2.0__react@19.2.0/node_modules/react-native-date-picker`)"
   - "react-native-safe-area-context (from `../../../node_modules/.pnpm/react-native-safe-area-context@5.6.2_react-native@0.83.1_@babel+core@7.28.5_@types+reac_e61b201cbc2f243c56f7c156ae9b4edc/node_modules/react-native-safe-area-context`)"
   - "React-NativeModulesApple (from `../../../node_modules/.pnpm/react-native@0.83.1_@babel+core@7.28.5_@types+react@19.1.17_react@19.2.0/node_modules/react-native/ReactCommon/react/nativemodule/core/platform/ios`)"
   - "React-networking (from `../../../node_modules/.pnpm/react-native@0.83.1_@babel+core@7.28.5_@types+react@19.1.17_react@19.2.0/node_modules/react-native/ReactCommon/react/networking`)"
@@ -2384,7 +2407,7 @@ DEPENDENCIES:
   - "RNGestureHandler (from `../../../node_modules/.pnpm/react-native-gesture-handler@2.28.0_react-native@0.83.1_@babel+core@7.28.5_@types+react_00ce33b7de8ed8ba2d0584146869c003/node_modules/react-native-gesture-handler`)"
   - "RNReanimated (from `../../../node_modules/.pnpm/react-native-reanimated@4.2.1_react-native-worklets@0.7.1_@babel+core@7.28.5_react-nati_929c9fae387b98ee89f50dbb572b21ac/node_modules/react-native-reanimated`)"
   - "RNScreens (from `../../../node_modules/.pnpm/react-native-screens@4.19.0_react-native@0.83.1_@babel+core@7.28.5_@types+react@19.1.17_react@19.2.0__react@19.2.0/node_modules/react-native-screens`)"
-  - "RNSVG (from `../../../node_modules/.pnpm/react-native-svg@15.12.1_react-native@0.83.1_@babel+core@7.28.5_@types+react@19.1.17_react@19.2.0__react@19.2.0/node_modules/react-native-svg`)"
+  - "RNSVG (from `../../../node_modules/.pnpm/react-native-svg@15.15.1_react-native@0.83.1_@babel+core@7.28.5_@types+react@19.1.17_react@19.2.0__react@19.2.0/node_modules/react-native-svg`)"
   - "RNWorklets (from `../../../node_modules/.pnpm/react-native-worklets@0.7.1_@babel+core@7.28.5_react-native@0.83.1_@babel+core@7.28.5_@_e51bcb82af19bef9f0f203f2100fcbdd/node_modules/react-native-worklets`)"
   - "Yoga (from `../../../node_modules/.pnpm/react-native@0.83.1_@babel+core@7.28.5_@types+react@19.1.17_react@19.2.0/node_modules/react-native/ReactCommon/yoga`)"
 
@@ -2522,6 +2545,8 @@ EXTERNAL SOURCES:
     :path: "../../../node_modules/.pnpm/react-native@0.83.1_@babel+core@7.28.5_@types+react@19.1.17_react@19.2.0/node_modules/react-native/ReactCommon"
   React-microtasksnativemodule:
     :path: "../../../node_modules/.pnpm/react-native@0.83.1_@babel+core@7.28.5_@types+react@19.1.17_react@19.2.0/node_modules/react-native/ReactCommon/react/nativemodule/microtasks"
+  react-native-date-picker:
+    :path: "../../../node_modules/.pnpm/react-native-date-picker@5.0.13_react-native@0.83.1_@babel+core@7.28.5_@types+react@19.1.17_react@19.2.0__react@19.2.0/node_modules/react-native-date-picker"
   react-native-safe-area-context:
     :path: "../../../node_modules/.pnpm/react-native-safe-area-context@5.6.2_react-native@0.83.1_@babel+core@7.28.5_@types+reac_e61b201cbc2f243c56f7c156ae9b4edc/node_modules/react-native-safe-area-context"
   React-NativeModulesApple:
@@ -2603,7 +2628,7 @@ EXTERNAL SOURCES:
   RNScreens:
     :path: "../../../node_modules/.pnpm/react-native-screens@4.19.0_react-native@0.83.1_@babel+core@7.28.5_@types+react@19.1.17_react@19.2.0__react@19.2.0/node_modules/react-native-screens"
   RNSVG:
-    :path: "../../../node_modules/.pnpm/react-native-svg@15.12.1_react-native@0.83.1_@babel+core@7.28.5_@types+react@19.1.17_react@19.2.0__react@19.2.0/node_modules/react-native-svg"
+    :path: "../../../node_modules/.pnpm/react-native-svg@15.15.1_react-native@0.83.1_@babel+core@7.28.5_@types+react@19.1.17_react@19.2.0__react@19.2.0/node_modules/react-native-svg"
   RNWorklets:
     :path: "../../../node_modules/.pnpm/react-native-worklets@0.7.1_@babel+core@7.28.5_react-native@0.83.1_@babel+core@7.28.5_@_e51bcb82af19bef9f0f203f2100fcbdd/node_modules/react-native-worklets"
   Yoga:
@@ -2674,6 +2699,7 @@ SPEC CHECKSUMS:
   React-logger: cca37d84f71231cd2e6b9f1a7e8a3e721e5ec944
   React-Mapbuffer: a6fc74cc27085555ac5839b2f792c19dc918d8bb
   React-microtasksnativemodule: 0f26742ab54a7d6cd59efb2299956dc9e60ab335
+  react-native-date-picker: 72dddb0a4b6019b11af8bf0ceefe636685921a79
   react-native-safe-area-context: 37e680fc4cace3c0030ee46e8987d24f5d3bdab2
   React-NativeModulesApple: e86264955e9a6402abb8e355f5888cb973ee78e3
   React-networking: 801db50c86db0c85557564a0422d41be84c3ea9f
@@ -2714,7 +2740,7 @@ SPEC CHECKSUMS:
   RNGestureHandler: b3c44a3420c74a8a45e5acbf87680092a72c72ff
   RNReanimated: d58eb2869351378561afd45b98abe8cfa6b56513
   RNScreens: 6f7a6128b0d33ce66e60309b6c998a2235abe1f3
-  RNSVG: 361a4f9d49dafdcd375f85337dd56a720adaa01e
+  RNSVG: bb9dc09f078cafaf09683a67dd5fde641e3e33cb
   RNWorklets: 42736e7ba9d1a3109654b0b80893f6ec8a49d60e
   SDWebImage: e9c98383c7572d713c1a0d7dd2783b10599b9838
   SDWebImageAVIFCoder: afe194a084e851f70228e4be35ef651df0fc5c57

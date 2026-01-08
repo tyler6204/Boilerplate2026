@@ -122,7 +122,7 @@ function AndroidSegmentedPicker({
   tintColor,
 }: SegmentedPickerProps) {
   const hostStyles = useResolveStyles(cn(segmentedPickerVariants({ align }), className));
-  const primaryColor = useTailwindToHex('primary', 0.2);
+  const primaryColor = useTailwindToHex('muted');
   const normalizedOptions = normalizeOptions(options);
 
   // Find current selected index

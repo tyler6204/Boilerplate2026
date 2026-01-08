@@ -4,7 +4,7 @@ import { useTailwindToHex } from '@/hooks/useTailwindToHex';
 export default function TabLayout() {
   const backgroundColor = useTailwindToHex('background');
   const tintColor = useTailwindToHex('primary');
-  const tabSelectedColor = useTailwindToHex('primary', 0.2);
+  const tabSelectedColor = useTailwindToHex('muted');
 
   return (
     <NativeTabs

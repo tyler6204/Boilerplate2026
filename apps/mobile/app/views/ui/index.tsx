@@ -23,6 +23,7 @@ import { Toggle } from '@/components/ui/toggle';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
 import { ContextMenu } from '@/components/ui/context-menu';
 import { SegmentedPicker } from '@/components/ui/segmented-picker';
+import { DatePicker } from '@/components/ui/date-picker';
 import { cn } from '@/lib/utils';
 
 function logButtonPress(name: string) {
@@ -47,6 +48,10 @@ export default function UIView() {
   const [collapsibleOpen, setCollapsibleOpen] = React.useState(false);
   const [pickerValue, setPickerValue] = React.useState('medium');
   const [priceRange, setPriceRange] = React.useState('$$');
+  const [datePickerDate, setDatePickerDate] = React.useState(new Date());
+  const [timePickerDate, setTimePickerDate] = React.useState(new Date());
+  const [dateTimePickerDate, setDateTimePickerDate] = React.useState(new Date());
+  const [inlineDatePickerDate, setInlineDatePickerDate] = React.useState(new Date());
 
   return (
     <ThemedScrollView showsVerticalScrollIndicator={false} contentContainerClassName="p-4 gap-8 pb-12">
@@ -122,6 +127,50 @@ export default function UIView() {
             </View>
           </View>
         </Section>
+        <Section title="Date Picker" variant="secondary">
+          <View className="gap-4">
+            <View className="gap-2">
+              <Text className="text-muted-foreground text-sm">
+                Date: {datePickerDate.toLocaleDateString()}
+              </Text>
+              <DatePicker
+                value={datePickerDate}
+                onValueChange={setDatePickerDate}
+                mode="date"
+              />
+            </View>
+            <View className="gap-2">
+              <Text className="text-muted-foreground text-sm">
+                Time: {timePickerDate.toLocaleTimeString()}
+              </Text>
+              <DatePicker
+                value={timePickerDate}
+                onValueChange={setTimePickerDate}
+                mode="time"
+              />
+            </View>
+            <View className="gap-2">
+              <Text className="text-muted-foreground text-sm">
+                DateTime: {dateTimePickerDate.toLocaleString()}
+              </Text>
+              <DatePicker
+                value={dateTimePickerDate}
+                onValueChange={setDateTimePickerDate}
+                mode="datetime"
+              />
+            </View>
+            <View className="gap-2">
+              <Text className="text-muted-foreground text-sm">Inline Style</Text>
+              <DatePicker
+                value={inlineDatePickerDate}
+                onValueChange={setInlineDatePickerDate}
+                mode="time"
+                displayStyle="inline"
+                className="w-full items-center"
+              />
+            </View>
+          </View>
+        </Section>
       </Section>
 
       <Separator />
@@ -172,7 +221,7 @@ export default function UIView() {
             <Text>Link</Text>
           </Button>
         </View>
-        <View className="flex-row flex-wrap gap-2">
+        <View className="flex-row flex-wrap items-center gap-2">
           <Button size="sm" haptic='light' onPress={() => logButtonPress("Small")}>
             <Text>Small</Text>
           </Button>
@@ -183,7 +232,7 @@ export default function UIView() {
             <Text>Large</Text>
           </Button>
           <Button size="icon" haptic='light' onPress={() => logButtonPress("Icon")}>
-            <IconSymbol name="plus" className="size-4 text-primary-foreground" />
+            <IconSymbol name="plus" className="size-5 text-primary-foreground font-semibold" />
           </Button>
         </View>
         <Button disabled onPress={() => logButtonPress("Disabled")}>
@@ -282,6 +331,11 @@ export default function UIView() {
             <Switch checked={switchChecked} onCheckedChange={setSwitchChecked} className="bg-primary text-red-500" />
             <Text>Enable notifications</Text>
           </View>
+          <View className="flex-row items-center gap-3">
+            <Switch checked={switchChecked} onCheckedChange={setSwitchChecked} trackColorOn="destructive" thumbColor='white'/>
+            <Text>Colored Toggle</Text>
+          </View>
+
           <View className="flex-row items-center gap-3">
             <Checkbox checked={checkboxChecked} onCheckedChange={setCheckboxChecked} />
             <Text>Accept terms and conditions</Text>

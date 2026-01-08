@@ -1,5 +1,5 @@
 import { useResolveClassNames, } from 'uniwind';
-import { type ViewStyle, type TextStyle, type ImageStyle, StyleProp } from 'react-native';
+import { type ViewStyle, StyleProp } from 'react-native';
 import { cn } from '@/lib/utils';
 
 /**

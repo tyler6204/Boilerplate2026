@@ -50,7 +50,7 @@
     ".next/types/**/*.ts",
     ".next/dev/types/**/*.ts",
     "**/*.mts"
-  ],
+, "../mobile/components/ui/date-time-picker.tsx"  ],
   "exclude": [
     "node_modules"
   ]

@@ -8,6 +8,12 @@ type SwitchProps = {
   onCheckedChange?: (checked: boolean) => void;
   disabled?: boolean;
   className?: string;
+  /** Tailwind color class for track when ON (e.g., 'primary', 'green-500') */
+  trackColorOn?: string;
+  /** Tailwind color class for track when OFF (e.g., 'input', 'gray-300') */
+  trackColorOff?: string;
+  /** Tailwind color class for thumb (e.g., 'background', 'white') */
+  thumbColor?: string;
 };
 
 function Switch({
@@ -15,12 +21,15 @@ function Switch({
   checked = false,
   onCheckedChange,
   disabled = false,
+  trackColorOn = undefined,
+  trackColorOff = undefined,
+  thumbColor = undefined,
   ...props
 }: SwitchProps) {
   // Resolve theme colors for native Switch
-  const primaryColor = useTailwindToHex('primary');
-  const inputColor = useTailwindToHex('input');
-  const backgroundColor = useTailwindToHex('background');
+  const trackOnHex = useTailwindToHex(trackColorOn);
+  const trackOffHex = useTailwindToHex(trackColorOff);
+  const thumbHex = useTailwindToHex(thumbColor);
 
   // Use native Switch on native platforms, primitives on web
   if (Platform.OS !== 'web') {
@@ -30,11 +39,11 @@ function Switch({
         onValueChange={onCheckedChange || (() => { })}
         disabled={disabled}
         trackColor={{
-          false: inputColor || '#e2e8f0',
-          true: primaryColor || '#3b82f6',
+          false: trackOffHex || undefined,
+          true: trackOnHex || undefined,
         }}
-        thumbColor={backgroundColor || '#ffffff'}
-        ios_backgroundColor={inputColor || '#e2e8f0'}
+        thumbColor={thumbHex || undefined}
+        ios_backgroundColor={trackOffHex || undefined}
         {...props}
       />
     );

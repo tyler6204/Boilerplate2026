@@ -40,7 +40,7 @@ function CollapsibleContent({
           })
         )}
         {...props}>
-        <View className={cn('pb-4', className)}>
+        <View className={cn(className)}>
           {children}
         </View>
       </CollapsiblePrimitive.Content>
