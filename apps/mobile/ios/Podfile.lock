@@ -1,9 +1,4 @@
 PODS:
-  - ComputableLayout (0.7.0):
-    - DGSwiftUtilities (~> 0.11)
-  - ContextMenuAuxiliaryPreview (0.5.2):
-    - DGSwiftUtilities (~> 0.29)
-  - DGSwiftUtilities (0.47.0)
   - EXConstants (18.1.0-canary-20251230-fc48ddc):
     - ExpoModulesCore
   - Expo (55.0.0-canary-20251230-fc48ddc):
@@ -1517,79 +1512,6 @@ PODS:
     - React-RCTFBReactNativeSpec
     - ReactCommon/turbomodule/core
     - ReactNativeDependencies
-  - react-native-ios-context-menu (3.1.0):
-    - ContextMenuAuxiliaryPreview (~> 0.5)
-    - DGSwiftUtilities
-    - hermes-engine
-    - RCTRequired
-    - RCTTypeSafety
-    - React-Core
-    - React-Core-prebuilt
-    - React-debug
-    - React-Fabric
-    - React-featureflags
-    - React-graphics
-    - React-ImageManager
-    - React-jsi
-    - react-native-ios-utilities
-    - React-NativeModulesApple
-    - React-RCTAppDelegate
-    - React-RCTFabric
-    - React-renderercss
-    - React-rendererdebug
-    - React-utils
-    - ReactCodegen
-    - ReactCommon/turbomodule/bridging
-    - ReactCommon/turbomodule/core
-    - ReactNativeDependencies
-    - Yoga
-  - react-native-ios-utilities (5.1.2):
-    - ComputableLayout (~> 0.7)
-    - DGSwiftUtilities (~> 0.46)
-    - hermes-engine
-    - RCTRequired
-    - RCTTypeSafety
-    - React-Core
-    - React-Core-prebuilt
-    - React-debug
-    - React-Fabric
-    - React-featureflags
-    - React-graphics
-    - React-ImageManager
-    - React-jsi
-    - React-NativeModulesApple
-    - React-RCTAppDelegate
-    - React-RCTFabric
-    - React-renderercss
-    - React-rendererdebug
-    - React-utils
-    - ReactCodegen
-    - ReactCommon/turbomodule/bridging
-    - ReactCommon/turbomodule/core
-    - ReactNativeDependencies
-    - Yoga
-  - react-native-menu (1.2.2):
-    - hermes-engine
-    - RCTRequired
-    - RCTTypeSafety
-    - React-Core
-    - React-Core-prebuilt
-    - React-debug
-    - React-Fabric
-    - React-featureflags
-    - React-graphics
-    - React-ImageManager
-    - React-jsi
-    - React-NativeModulesApple
-    - React-RCTFabric
-    - React-renderercss
-    - React-rendererdebug
-    - React-utils
-    - ReactCodegen
-    - ReactCommon/turbomodule/bridging
-    - ReactCommon/turbomodule/core
-    - ReactNativeDependencies
-    - Yoga
   - react-native-safe-area-context (5.6.2):
     - hermes-engine
     - RCTRequired
@@ -2422,9 +2344,6 @@ DEPENDENCIES:
   - "React-logger (from `../../../node_modules/.pnpm/react-native@0.83.1_@babel+core@7.28.5_@types+react@19.1.17_react@19.2.0/node_modules/react-native/ReactCommon/logger`)"
   - "React-Mapbuffer (from `../../../node_modules/.pnpm/react-native@0.83.1_@babel+core@7.28.5_@types+react@19.1.17_react@19.2.0/node_modules/react-native/ReactCommon`)"
   - "React-microtasksnativemodule (from `../../../node_modules/.pnpm/react-native@0.83.1_@babel+core@7.28.5_@types+react@19.1.17_react@19.2.0/node_modules/react-native/ReactCommon/react/nativemodule/microtasks`)"
-  - "react-native-ios-context-menu (from `../../../node_modules/.pnpm/react-native-ios-context-menu@3.1.0_react-native-ios-utilities@5.1.2_react-native@0.83._bc5ddfef619f6e950290d6f96c82ffe3/node_modules/react-native-ios-context-menu`)"
-  - "react-native-ios-utilities (from `../../../node_modules/.pnpm/react-native-ios-utilities@5.1.2_react-native@0.83.1_@babel+core@7.28.5_@types+react@19.1.17_react@19.2.0__react@19.2.0/node_modules/react-native-ios-utilities`)"
-  - "react-native-menu (from `../../../node_modules/.pnpm/@react-native-menu+menu@1.2.2_react-native@0.83.1_@babel+core@7.28.5_@types+react@19.1.17_react@19.2.0__react@19.2.0/node_modules/@react-native-menu/menu`)"
   - "react-native-safe-area-context (from `../../../node_modules/.pnpm/react-native-safe-area-context@5.6.2_react-native@0.83.1_@babel+core@7.28.5_@types+reac_e61b201cbc2f243c56f7c156ae9b4edc/node_modules/react-native-safe-area-context`)"
   - "React-NativeModulesApple (from `../../../node_modules/.pnpm/react-native@0.83.1_@babel+core@7.28.5_@types+react@19.1.17_react@19.2.0/node_modules/react-native/ReactCommon/react/nativemodule/core/platform/ios`)"
   - "React-networking (from `../../../node_modules/.pnpm/react-native@0.83.1_@babel+core@7.28.5_@types+react@19.1.17_react@19.2.0/node_modules/react-native/ReactCommon/react/networking`)"
@@ -2471,9 +2390,6 @@ DEPENDENCIES:
 
 SPEC REPOS:
   trunk:
-    - ComputableLayout
-    - ContextMenuAuxiliaryPreview
-    - DGSwiftUtilities
     - libavif
     - libdav1d
     - libwebp
@@ -2606,12 +2522,6 @@ EXTERNAL SOURCES:
     :path: "../../../node_modules/.pnpm/react-native@0.83.1_@babel+core@7.28.5_@types+react@19.1.17_react@19.2.0/node_modules/react-native/ReactCommon"
   React-microtasksnativemodule:
     :path: "../../../node_modules/.pnpm/react-native@0.83.1_@babel+core@7.28.5_@types+react@19.1.17_react@19.2.0/node_modules/react-native/ReactCommon/react/nativemodule/microtasks"
-  react-native-ios-context-menu:
-    :path: "../../../node_modules/.pnpm/react-native-ios-context-menu@3.1.0_react-native-ios-utilities@5.1.2_react-native@0.83._bc5ddfef619f6e950290d6f96c82ffe3/node_modules/react-native-ios-context-menu"
-  react-native-ios-utilities:
-    :path: "../../../node_modules/.pnpm/react-native-ios-utilities@5.1.2_react-native@0.83.1_@babel+core@7.28.5_@types+react@19.1.17_react@19.2.0__react@19.2.0/node_modules/react-native-ios-utilities"
-  react-native-menu:
-    :path: "../../../node_modules/.pnpm/@react-native-menu+menu@1.2.2_react-native@0.83.1_@babel+core@7.28.5_@types+react@19.1.17_react@19.2.0__react@19.2.0/node_modules/@react-native-menu/menu"
   react-native-safe-area-context:
     :path: "../../../node_modules/.pnpm/react-native-safe-area-context@5.6.2_react-native@0.83.1_@babel+core@7.28.5_@types+reac_e61b201cbc2f243c56f7c156ae9b4edc/node_modules/react-native-safe-area-context"
   React-NativeModulesApple:
@@ -2700,9 +2610,6 @@ EXTERNAL SOURCES:
     :path: "../../../node_modules/.pnpm/react-native@0.83.1_@babel+core@7.28.5_@types+react@19.1.17_react@19.2.0/node_modules/react-native/ReactCommon/yoga"
 
 SPEC CHECKSUMS:
-  ComputableLayout: c50faffac4ed9f8f05b0ce5e6f3a60df1f6042c8
-  ContextMenuAuxiliaryPreview: 20be0be795b783b68f8792732eed4bed9f202c1c
-  DGSwiftUtilities: 567f8d5ee618f0b7afb185b17aa45ff356315a0f
   EXConstants: e6c60ca88d3e647f170d735b46dc30c68b6f2e1e
   Expo: c510478b9f1d572970724930fa34586e4480934e
   ExpoAsset: 3a398bd43fd8ffddf358c875925d02c739212556
@@ -2767,9 +2674,6 @@ SPEC CHECKSUMS:
   React-logger: cca37d84f71231cd2e6b9f1a7e8a3e721e5ec944
   React-Mapbuffer: a6fc74cc27085555ac5839b2f792c19dc918d8bb
   React-microtasksnativemodule: 0f26742ab54a7d6cd59efb2299956dc9e60ab335
-  react-native-ios-context-menu: 77f6c20c08d2cecc5d96d943f777c2a7c69ce287
-  react-native-ios-utilities: 932e72f99fffab950158ed7cf34b9ca1a17ed4ee
-  react-native-menu: 9644e03cbd35d8cc536eeb800469e32f41c6b7ed
   react-native-safe-area-context: 37e680fc4cace3c0030ee46e8987d24f5d3bdab2
   React-NativeModulesApple: e86264955e9a6402abb8e355f5888cb973ee78e3
   React-networking: 801db50c86db0c85557564a0422d41be84c3ea9f

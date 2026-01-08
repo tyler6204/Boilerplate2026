@@ -13,7 +13,7 @@ export function CTA({ appName: _appName }: CTAProps) {
     <section id="cta" className="py-24 sm:py-32">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="mx-auto max-w-2xl text-center">
-          <h2 className="font-title font-bold tracking-tight sm:text-4xl text-balance">
+          <h2 className="font-title font-bold tracking-tight sm:font-large-title text-balance">
             Ready to ship faster?
           </h2>
           <p className="mt-4 font-body text-foreground/60 text-balance">

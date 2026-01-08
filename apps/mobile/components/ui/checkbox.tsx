@@ -1,7 +1,28 @@
 import { IconSymbol } from '@/components/icon';
 import { cn } from '@/lib/utils';
 import * as CheckboxPrimitive from '@rn-primitives/checkbox';
+import * as Haptics from 'expo-haptics';
 import { Platform } from 'react-native';
+
+type HapticStyle = 'light' | 'medium' | 'heavy' | 'selection';
+
+function triggerHaptic(style: HapticStyle) {
+  if (Platform.OS === 'web') return;
+  switch (style) {
+    case 'light':
+      Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+      break;
+    case 'medium':
+      Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
+      break;
+    case 'heavy':
+      Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Heavy);
+      break;
+    case 'selection':
+      Haptics.selectionAsync();
+      break;
+  }
+}
 
 const DEFAULT_HIT_SLOP = 12;
 
@@ -10,13 +31,23 @@ function Checkbox({
   checkedClassName,
   indicatorClassName,
   iconClassName,
+  haptic = 'light',
+  onCheckedChange,
   ...props
 }: CheckboxPrimitive.RootProps &
   React.RefAttributes<CheckboxPrimitive.RootRef> & {
     checkedClassName?: string;
     indicatorClassName?: string;
     iconClassName?: string;
+    haptic?: HapticStyle | false;
   }) {
+  const handleCheckedChange = (checked: boolean) => {
+    if (haptic) {
+      triggerHaptic(haptic);
+    }
+    onCheckedChange?.(checked);
+  };
+
   return (
     <CheckboxPrimitive.Root
       className={cn(
@@ -30,6 +61,7 @@ function Checkbox({
         className
       )}
       hitSlop={DEFAULT_HIT_SLOP}
+      onCheckedChange={handleCheckedChange}
       {...props}>
       <CheckboxPrimitive.Indicator
         className={cn('bg-primary h-full w-full items-center justify-center', indicatorClassName)}>

@@ -69,7 +69,7 @@ export function Testimonials() {
           <p className="font-footnote font-medium text-brand tracking-wide uppercase">
             Testimonials
           </p>
-          <h2 className="mt-2 font-title font-bold tracking-tight sm:text-4xl text-balance">
+          <h2 className="mt-2 font-title font-bold tracking-tight sm:font-large-title text-balance">
             Used by teams who ship
           </h2>
         </div>

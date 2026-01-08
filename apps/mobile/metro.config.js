@@ -16,8 +16,9 @@ const config = getDefaultConfig(__dirname);
 const workspaceRoot = resolve(__dirname, "../..");
 const convexRoot = resolve(workspaceRoot, "services/convex");
 
-// Watch only the folders we actually depend on (not the whole monorepo)
+// Extend default watch folders with monorepo packages
 config.watchFolders = [
+  ...(config.watchFolders || []),
   resolve(workspaceRoot, "packages"),
   resolve(workspaceRoot, "services"),
 ];
@@ -25,6 +26,8 @@ config.watchFolders = [
 // Add path alias resolution for Metro bundler
 config.resolver = {
   ...config.resolver,
+  // Exclude web app from Metro's watch to prevent cross-app reloads
+  blockList: [/apps\/web\/.*/],
   alias: {
     ...config.resolver?.alias,
     "@/convex": convexRoot,

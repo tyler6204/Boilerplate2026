@@ -1,7 +1,10 @@
 import { TextClassContext } from '@/components/ui/text';
 import { cn } from '@/lib/utils';
 import { cva, type VariantProps } from 'class-variance-authority';
+import * as Haptics from 'expo-haptics';
 import { Platform, Pressable } from 'react-native';
+
+type HapticStyle = 'light' | 'medium' | 'heavy' | 'selection';
 
 // NOTE: group-* is not supported yet by Uniwind
 
@@ -107,13 +110,13 @@ const buttonTextVariants = cva(
         secondary: 'text-secondary-foreground',
         ghost: 'group-active:text-accent-foreground',
         link: cn(
-          'text-primary group-active:underline',
+          'text-primary underline',
           Platform.select({ web: 'underline-offset-4 hover:underline group-hover:underline' })
         ),
         plain: 'text-foreground',
       },
       size: {
-        default: 'font-footnote',
+        default: 'font-base',
         sm: 'font-caption',
         lg: 'font-callout',
         icon: 'font-footnote',
@@ -130,7 +133,9 @@ const buttonTextVariants = cva(
 
 type ButtonProps = React.ComponentProps<typeof Pressable> &
   React.RefAttributes<typeof Pressable> &
-  VariantProps<typeof buttonVariants>;
+  VariantProps<typeof buttonVariants> & {
+    haptic?: HapticStyle;
+  };
 
 function extractTextColorClasses(className?: string): string {
   if (!className) return '';
@@ -147,7 +152,25 @@ function removeTextColorClasses(className?: string): string | undefined {
   return cleaned || undefined;
 }
 
-function Button({ className, variant, size, ...props }: ButtonProps) {
+function triggerHaptic(style: HapticStyle) {
+  if (Platform.OS === 'web') return;
+  switch (style) {
+    case 'light':
+      Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+      break;
+    case 'medium':
+      Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
+      break;
+    case 'heavy':
+      Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Heavy);
+      break;
+    case 'selection':
+      Haptics.selectionAsync();
+      break;
+  }
+}
+
+function Button({ className, variant, size, haptic, onPress, ...props }: ButtonProps) {
   // Extract text color classes from className to pass to Text context
   const textColorClasses = extractTextColorClasses(className);
   const textContextValue = cn(buttonTextVariants({ variant, size }), textColorClasses);
@@ -155,11 +178,19 @@ function Button({ className, variant, size, ...props }: ButtonProps) {
   // Remove text color classes from Pressable className since they should only apply to Text
   const pressableClassName = removeTextColorClasses(className);
 
+  const handlePress = (e: Parameters<NonNullable<typeof onPress>>[0]) => {
+    if (haptic) {
+      triggerHaptic(haptic);
+    }
+    onPress?.(e);
+  };
+
   return (
     <TextClassContext.Provider value={textContextValue}>
       <Pressable
         className={cn(props.disabled && 'opacity-50', buttonVariants({ variant, size }), pressableClassName)}
         role="button"
+        onPress={handlePress}
         {...props}
       />
     </TextClassContext.Provider>

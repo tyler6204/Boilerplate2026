@@ -79,7 +79,7 @@ export function ThemeSwitcher() {
 
   return (
     <div className="flex flex-col gap-2">
-      <span className="text-sm font-medium text-foreground">Theme</span>
+      <span className="font-footnote font-medium text-foreground">Theme</span>
       <div className="flex flex-wrap gap-2">
         {THEME_OPTIONS.map((option) => {
           const isActive = theme === option.value;
@@ -95,14 +95,14 @@ export function ThemeSwitcher() {
               )}
             >
               <span>{option.emoji}</span>
-              <span className={cn("text-sm", isActive && "font-semibold")}>
+              <span className={cn("font-footnote", isActive && "font-semibold")}>
                 {option.label}
               </span>
             </button>
           );
         })}
       </div>
-      <span className="text-xs text-foreground-secondary">
+      <span className="font-caption text-foreground-secondary">
         Current: {resolvedTheme}
       </span>
     </div>

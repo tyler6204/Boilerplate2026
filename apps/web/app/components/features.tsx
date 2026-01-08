@@ -57,7 +57,7 @@ export function Features() {
           <p className="font-footnote font-medium text-brand tracking-wide uppercase">
             Everything you need
           </p>
-          <h2 className="mt-2 font-title font-bold tracking-tight sm:text-4xl text-balance">
+          <h2 className="mt-2 font-title font-bold tracking-tight sm:font-large-title text-balance">
             Features that actually matter
           </h2>
           <p className="mt-4 font-body text-foreground/60 text-balance">
@@ -72,8 +72,8 @@ export function Features() {
             {FEATURES.map((feature) => (
               <div key={feature.name} className="relative pl-12">
                 <dt className="font-callout font-semibold leading-7">
-                  <div className="absolute left-0 top-0 flex size-9 items-center justify-center rounded-lg bg-foreground">
-                    <feature.icon className="size-5 text-background" aria-hidden="true" />
+                  <div className="absolute left-0 top-0 flex size-9 items-center justify-center rounded-lg bg-foreground [&_svg]:text-background">
+                    <feature.icon className="size-5" aria-hidden="true" />
                   </div>
                   {feature.name}
                 </dt>

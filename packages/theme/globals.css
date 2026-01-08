@@ -1,7 +1,28 @@
 /* ===========================================
    FONT SIZE UTILITIES (SwiftUI-style)
+   Pattern: +6px increments from title upward
    =========================================== */
 @layer utilities {
+  /* Display sizes (for hero headlines, +6px increments) */
+  .font-display-4xl {
+    font-size: 70px;
+  }
+  .font-display-3xl {
+    font-size: 64px;
+  }
+  .font-display-2xl {
+    font-size: 58px;
+  }
+  .font-display-xl {
+    font-size: 52px;
+  }
+  .font-display-lg {
+    font-size: 46px;
+  }
+  .font-display {
+    font-size: 40px;
+  }
+  /* Standard sizes (SwiftUI-inspired) */
   .font-large-title {
     font-size: 34px;
   }

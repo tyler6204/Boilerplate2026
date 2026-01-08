@@ -21,6 +21,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Switch } from "@/components/ui/switch";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Progress } from "@/components/ui/progress";
+import { Spinner } from "@/components/ui/spinner";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Separator } from "@/components/ui/separator";
 import {
@@ -63,6 +64,10 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 
+function logButtonPress(name: string) {
+  console.log(`Button "${name}" was pressed`);
+}
+
 function Section({
   title,
   children,
@@ -72,7 +77,7 @@ function Section({
 }) {
   return (
     <div className="flex flex-col gap-3">
-      <h2 className="text-lg font-semibold text-foreground">{title}</h2>
+      <h2 className="font-body font-semibold text-foreground">{title}</h2>
       {children}
     </div>
   );
@@ -95,7 +100,7 @@ export default function UIPage() {
           <Link href="/" className="font-semibold">
             ← Back to Home
           </Link>
-          <h1 className="ml-auto text-lg font-semibold">UI Components</h1>
+          <h1 className="ml-auto font-body font-semibold">UI Components</h1>
         </div>
       </header>
 
@@ -105,31 +110,31 @@ export default function UIPage() {
           {/* Buttons */}
           <Section title="Buttons">
             <div className="flex flex-wrap gap-2">
-              <Button>Default</Button>
-              <Button variant="secondary">Secondary</Button>
-              <Button variant="destructive">Destructive</Button>
-              <Button variant="outline">Outline</Button>
-              <Button variant="ghost">Ghost</Button>
-              <Button variant="link">Link</Button>
+              <Button onClick={() => logButtonPress("Default")}>Default</Button>
+              <Button variant="secondary" onClick={() => logButtonPress("Secondary")}>Secondary</Button>
+              <Button variant="destructive" onClick={() => logButtonPress("Destructive")}>Destructive</Button>
+              <Button variant="outline" onClick={() => logButtonPress("Outline")}>Outline</Button>
+              <Button variant="ghost" onClick={() => logButtonPress("Ghost")}>Ghost</Button>
+              <Button variant="link" onClick={() => logButtonPress("Link")}>Link</Button>
             </div>
             <div className="flex flex-wrap gap-2">
-              <Button size="sm">Small</Button>
-              <Button size="default">Default</Button>
-              <Button size="lg">Large</Button>
-              <Button size="icon">
+              <Button size="sm" onClick={() => logButtonPress("Small")}>Small</Button>
+              <Button size="default" onClick={() => logButtonPress("Default Size")}>Default</Button>
+              <Button size="lg" onClick={() => logButtonPress("Large")}>Large</Button>
+              <Button size="icon" onClick={() => logButtonPress("Icon")}>
                 <IconPlus className="size-4" />
               </Button>
             </div>
-            <Button disabled>Disabled</Button>
+            <Button disabled onClick={() => logButtonPress("Disabled")}>Disabled</Button>
             <div className="flex flex-wrap gap-2 items-center">
-              <Button variant="plain" size="sm">Plain Small</Button>
-              <Button variant="plain" size="default">Plain Default</Button>
-              <Button variant="plain" size="lg">Plain Large</Button>
+              <Button variant="plain" size="sm" onClick={() => logButtonPress("Plain Small")}>Plain Small</Button>
+              <Button variant="plain" size="default" onClick={() => logButtonPress("Plain Default")}>Plain Default</Button>
+              <Button variant="plain" size="lg" onClick={() => logButtonPress("Plain Large")}>Plain Large</Button>
             </div>
             <div className="flex flex-wrap gap-2 items-center">
-              <Button variant="plain" className="text-primary">Custom Primary</Button>
-              <Button variant="plain" className="text-destructive font-bold">Custom Destructive</Button>
-              <Button variant="plain" className="text-blue-500 text-lg">Custom Blue</Button>
+              <Button variant="plain" className="text-primary" onClick={() => logButtonPress("Custom Primary")}>Custom Primary</Button>
+              <Button variant="plain" className="text-destructive font-bold" onClick={() => logButtonPress("Custom Destructive")}>Custom Destructive</Button>
+              <Button variant="plain" className="text-blue-500 font-body" onClick={() => logButtonPress("Custom Blue")}>Custom Blue</Button>
             </div>
           </Section>
 
@@ -246,8 +251,8 @@ export default function UIPage() {
 
           <Separator />
 
-          {/* Progress */}
-          <Section title="Progress">
+          {/* Progress & Spinner */}
+          <Section title="Progress & Spinner">
             <Progress value={progress} />
             <div className="flex gap-2">
               <Button
@@ -265,6 +270,12 @@ export default function UIPage() {
                 +10
               </Button>
             </div>
+            <div className="flex items-center gap-4">
+              <Spinner />
+              <Spinner className="size-6" />
+              <Spinner className="size-8 text-primary" />
+              <Spinner className="size-10 text-destructive" />
+            </div>
           </Section>
 
           <Separator />
@@ -280,7 +291,7 @@ export default function UIPage() {
                 <AvatarFallback>AB</AvatarFallback>
               </Avatar>
               <Avatar className="size-16">
-                <AvatarFallback className="text-lg">XY</AvatarFallback>
+                <AvatarFallback className="font-body">XY</AvatarFallback>
               </Avatar>
             </div>
           </Section>

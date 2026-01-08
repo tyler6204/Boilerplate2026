@@ -4,6 +4,7 @@ import "../global.css"
 import { ConvexClientProvider } from '@/components/convex-provider';
 import DynamicStatusBar from '@/components/status-bar';
 import { PortalHost } from '@rn-primitives/portal';
+import { useDefaultScreenOptions } from '@/lib/create-header';
 
 export const unstable_settings = {
   anchor: '(tabs)',
@@ -12,7 +13,7 @@ export const unstable_settings = {
 export default function RootLayout() {
   return (
     <ConvexClientProvider>
-      <Stack screenOptions={{ headerTransparent: true }}>
+      <Stack screenOptions={useDefaultScreenOptions()}>
         <Stack.Screen name="(tabs)" options={{ title: 'Home', headerShown: false }} />
         <Stack.Screen
           name="views/modals/example/index"

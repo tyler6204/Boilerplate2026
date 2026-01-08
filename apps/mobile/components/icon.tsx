@@ -3,7 +3,7 @@ import { MaterialIcons } from '@expo/vector-icons';
 import { SymbolView, SymbolViewProps, SymbolWeight } from 'expo-symbols';
 import { Platform } from 'react-native';
 import { cn } from '@/lib/utils';
-import { ICON_MAPPING, type IconSymbolName } from './icon-mapping';
+import { getTablerIcon, getMaterialIconName, type IconSymbolName } from './icon-mapping';
 import { useResolveClassNames } from 'uniwind';
 type IconType = 'tabler' | 'sf' | 'material' | 'native';
 
@@ -139,7 +139,7 @@ export function IconSymbol({
 
   // Render Material Icons
   if (resolvedIconType === 'material') {
-    const materialIconName = ICON_MAPPING[nameString]?.material || 'help-outline';
+    const materialIconName = getMaterialIconName(nameString, 'IconSymbol');
     return (
       <MaterialIcons
         name={materialIconName}
@@ -151,7 +151,7 @@ export function IconSymbol({
   }
 
   // Render Tabler icons
-  const TablerIcon = ICON_MAPPING[nameString]?.tabler;
+  const TablerIcon = getTablerIcon(nameString, 'IconSymbol');
   if (!TablerIcon) {
     return (
       <IconQuestionMark
