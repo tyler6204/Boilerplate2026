@@ -276,6 +276,18 @@ export const ICON_MAPPING: IconMapping = {
     nativeMaterial: "filled.Share",
   },
 
+  // Effects & Gestures
+  sparkles: {
+    tabler: TablerIcons.IconSparkles,
+    material: "auto-awesome",
+    nativeMaterial: "filled.Star",
+  },
+  "hand.tap": {
+    tabler: TablerIcons.IconHandClick,
+    material: "touch-app",
+    nativeMaterial: "filled.ThumbUp",
+  },
+
   // Media & Favorites
   star: {
     tabler: TablerIcons.IconStar,

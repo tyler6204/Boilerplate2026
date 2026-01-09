@@ -10,12 +10,12 @@ type IconType = 'tabler' | 'sf' | 'material' | 'native';
 /**
  * An icon component that supports multiple icon libraries.
  * - iOS: SF Symbols (default)
- * - Android: Material Icons (default)
+ * - Android: Material Icons (default, can be overridden with androidNative={false})
  * - Web: Tabler Icons (default)
  *
  * Icon types:
  * - 'native': Automatically selects SF Symbols (iOS), Material Icons (Android), or Tabler Icons (Web) [default]
- * - 'sf': SF Symbols (iOS only, falls back to Material on other platforms)
+ * - 'sf': SF Symbols (iOS only, falls back to Tabler on other platforms)
  * - 'material': Material Icons
  * - 'tabler': Tabler Icons
  *
@@ -26,15 +26,18 @@ type IconType = 'tabler' | 'sf' | 'material' | 'native';
  * <IconSymbol name="house.fill" className="size-6 text-primary" />
  * <IconSymbol name="chevron.right" className="w-5 h-5 font-semibold text-foreground" />
  * <IconSymbol name="gear" className="opacity-50" />
+ * <IconSymbol name="gear" androidNative={false} /> // Uses Tabler on Android
  */
 export function IconSymbol({
   name,
   className,
   iconType,
+  androidNative = true,
 }: {
   name: string | SymbolViewProps['name'] | IconSymbolName;
   className?: string;
   iconType?: IconType;
+  androidNative?: boolean;
 }) {
   const isIOS = Platform.OS === 'ios';
 
@@ -108,17 +111,17 @@ export function IconSymbol({
   const iconTypeToUse = iconType ?? 'native';
 
   if (iconTypeToUse === 'native') {
-    // Native type: SF Symbols on iOS, Material Icons on Android, Tabler Icons on Web
+    // Native type: SF Symbols on iOS, Material Icons on Android (or Tabler if androidNative=false), Tabler Icons on Web
     if (Platform.OS === 'ios') {
       resolvedIconType = 'sf';
     } else if (Platform.OS === 'android') {
-      resolvedIconType = 'material';
+      resolvedIconType = androidNative ? 'material' : 'tabler';
     } else {
       resolvedIconType = 'tabler';
     }
   } else if (!isIOS && iconTypeToUse === 'sf') {
-    // Fallback to material on Android/web if sf-symbol is requested
-    resolvedIconType = 'material';
+    // Fallback to tabler on Android/web if sf-symbol is requested
+    resolvedIconType = 'tabler';
   } else {
     resolvedIconType = iconTypeToUse;
   }
@@ -164,10 +167,12 @@ export function IconSymbol({
 
   // Convert weight to stroke width (Tabler uses strokeWidth prop)
   const strokeWidth =
-    weight === 'bold' ? 2.5 :
-      weight === 'semibold' ? 2 :
-        weight === 'medium' ? 1.75 :
-          1.5;
+    weight === 'bold' ? 4 :
+    weight === 'semibold' ? 3.25 :
+    weight === 'medium' ? 2.75 :
+    weight === 'regular' ? 2 :
+    weight === 'light' ? 1.25 :
+    1;
 
   return (
     <TablerIcon

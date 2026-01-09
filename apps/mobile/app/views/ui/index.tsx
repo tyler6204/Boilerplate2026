@@ -24,6 +24,7 @@ import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/component
 import { ContextMenu } from '@/components/ui/context-menu';
 import { SegmentedPicker } from '@/components/ui/segmented-picker';
 import { DatePicker } from '@/components/ui/date-picker';
+import { GlassView } from '@/components/glass-view';
 import { cn } from '@/lib/utils';
 
 function logButtonPress(name: string) {
@@ -48,15 +49,25 @@ export default function UIView() {
   const [collapsibleOpen, setCollapsibleOpen] = React.useState(false);
   const [pickerValue, setPickerValue] = React.useState('medium');
   const [priceRange, setPriceRange] = React.useState('$$');
-  const [datePickerDate, setDatePickerDate] = React.useState(new Date());
-  const [timePickerDate, setTimePickerDate] = React.useState(new Date());
   const [dateTimePickerDate, setDateTimePickerDate] = React.useState(new Date());
   const [inlineDatePickerDate, setInlineDatePickerDate] = React.useState(new Date());
 
   return (
     <ThemedScrollView showsVerticalScrollIndicator={false} contentContainerClassName="p-4 gap-8 pb-12">
-      {/* Context Menu */}
+      {/* Native Components */}
       <Section title="Native Components">
+        <Section title="Liquid Glass (iOS 26+)" variant="secondary">
+          <View className="flex-row gap-3">
+            <GlassView className="flex-1 p-4 rounded-xl items-center gap-2">
+              <IconSymbol name="sparkles" className="size-6 text-primary" />
+              <Text className="font-headline text-foreground">Default</Text>
+            </GlassView>
+            <GlassView interactive tintColor="blue-300" className="flex-1 p-4 rounded-xl items-center gap-2">
+              <IconSymbol name="star.fill" className="size-6 text-primary-foreground" />
+              <Text className="font-headline text-primary-foreground">Tinted</Text>
+            </GlassView>
+          </View>
+        </Section>
         <Section title="Context Menu" variant="secondary">
           <View className="flex-row gap-4">
             <ContextMenu
@@ -131,27 +142,7 @@ export default function UIView() {
           <View className="gap-4">
             <View className="gap-2">
               <Text className="text-muted-foreground text-sm">
-                Date: {datePickerDate.toLocaleDateString()}
-              </Text>
-              <DatePicker
-                value={datePickerDate}
-                onValueChange={setDatePickerDate}
-                mode="date"
-              />
-            </View>
-            <View className="gap-2">
-              <Text className="text-muted-foreground text-sm">
-                Time: {timePickerDate.toLocaleTimeString()}
-              </Text>
-              <DatePicker
-                value={timePickerDate}
-                onValueChange={setTimePickerDate}
-                mode="time"
-              />
-            </View>
-            <View className="gap-2">
-              <Text className="text-muted-foreground text-sm">
-                DateTime: {dateTimePickerDate.toLocaleString()}
+                Compact: {dateTimePickerDate.toLocaleString()}
               </Text>
               <DatePicker
                 value={dateTimePickerDate}
@@ -160,11 +151,11 @@ export default function UIView() {
               />
             </View>
             <View className="gap-2">
-              <Text className="text-muted-foreground text-sm">Inline Style</Text>
+              <Text className="text-muted-foreground text-sm">Inline</Text>
               <DatePicker
                 value={inlineDatePickerDate}
                 onValueChange={setInlineDatePickerDate}
-                mode="time"
+                mode="datetime"
                 displayStyle="inline"
                 className="w-full items-center"
               />
@@ -193,9 +184,6 @@ export default function UIView() {
             <Text>Dark</Text>
           </Button>
         </View>
-        <Button disabled>
-          <Text>Disabled</Text>
-        </Button>
       </Section>
 
 
@@ -235,8 +223,11 @@ export default function UIView() {
             <IconSymbol name="plus" className="size-5 text-primary-foreground font-semibold" />
           </Button>
         </View>
-        <Button disabled onPress={() => logButtonPress("Disabled")}>
+        <Button disabled className="bg-blue-800" onPress={() => logButtonPress("Disabled")}>
           <Text>Disabled</Text>
+        </Button>
+        <Button className="bg-blue-800" onPress={() => logButtonPress("Enabled")}>
+          <Text>Enabled</Text>
         </Button>
         <View className="flex-row flex-wrap gap-2 items-center">
           <Button variant="plain" size="sm" onPress={() => logButtonPress("Plain Small")}>

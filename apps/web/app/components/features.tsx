@@ -1,88 +1,122 @@
 "use client";
 
-import { IconBolt, IconShield, IconDeviceMobile, IconChartBar, IconCloud, IconUsers } from "@tabler/icons-react";
+import {
+  IconBolt,
+  IconShield,
+  IconDeviceMobile,
+  IconCloud,
+  IconRefresh,
+  IconPalette,
+} from "@tabler/icons-react";
 import type { Icon } from "@tabler/icons-react";
 
 interface Feature {
   name: string;
   description: string;
   icon: Icon;
+  highlight?: boolean;
 }
 
 const FEATURES: Feature[] = [
   {
-    name: "Lightning fast",
+    name: "Lightning Performance",
     description:
-      "Built for speed from the ground up. Sub-second load times and instant interactions that feel native.",
+      "Built for speed from the ground up. Sub-second load times and buttery-smooth 60fps animations that feel truly native.",
     icon: IconBolt,
+    highlight: true,
   },
   {
-    name: "Bank-grade security",
+    name: "Cross-Platform",
     description:
-      "End-to-end encryption, SOC 2 compliant, and regular security audits. Your data stays yours.",
-    icon: IconShield,
-  },
-  {
-    name: "Works everywhere",
-    description:
-      "Native apps for iOS and Android, plus a web app that works on any device. Sync happens instantly.",
+      "One codebase for iOS and Android. Native performance with React Native and Expo's modern toolchain.",
     icon: IconDeviceMobile,
   },
   {
-    name: "Built-in analytics",
+    name: "Secure by Default",
     description:
-      "Understand how your team works with actionable insights. No setup required, no third-party tools.",
-    icon: IconChartBar,
+      "End-to-end encryption, secure storage, and authentication patterns baked in from day one.",
+    icon: IconShield,
   },
   {
-    name: "Cloud-native",
+    name: "Cloud Sync",
     description:
-      "Automatic backups, 99.99% uptime, and infrastructure that scales with you. Zero maintenance.",
+      "Real-time data synchronization powered by Convex. Your users' data, always up to date.",
     icon: IconCloud,
   },
   {
-    name: "Team collaboration",
+    name: "Hot Reloading",
     description:
-      "Real-time collaboration features that make remote work feel like you're in the same room.",
-    icon: IconUsers,
+      "See your changes instantly. Fast refresh preserves state while you iterate on your app.",
+    icon: IconRefresh,
+  },
+  {
+    name: "Theme System",
+    description:
+      "Light and dark modes out of the box. Customizable design tokens shared across platforms.",
+    icon: IconPalette,
   },
 ];
 
 export function Features() {
   return (
-    <section id="features" className="py-24 sm:py-32">
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
+    <section id="features" className="py-24 sm:py-32 bg-foreground/[0.02]">
+      <div className="mx-auto max-w-6xl px-6">
         {/* Section header */}
-        <div className="mx-auto max-w-2xl lg:text-center">
-          <p className="font-footnote font-medium text-brand tracking-wide uppercase">
-            Everything you need
-          </p>
-          <h2 className="mt-2 font-title font-bold tracking-tight sm:font-large-title text-balance">
-            Features that actually matter
+        <div className="max-w-2xl mb-16">
+          <h2 className="font-title font-bold tracking-tight sm:font-large-title">
+            Everything you need to ship
           </h2>
-          <p className="mt-4 font-body text-foreground/60 text-balance">
-            No bloat. No feature creep. Just the tools you need to ship great products,
-            designed to work together seamlessly.
+          <p className="mt-4 font-body text-foreground/60 leading-relaxed">
+            A complete foundation for building production-ready mobile apps.
+            No boilerplate fatigue, just the good parts.
           </p>
         </div>
 
-        {/* Feature grid */}
-        <div className="mx-auto mt-16 max-w-2xl sm:mt-20 lg:mt-24 lg:max-w-none">
-          <dl className="grid max-w-xl grid-cols-1 gap-x-8 gap-y-10 lg:max-w-none lg:grid-cols-3">
-            {FEATURES.map((feature) => (
-              <div key={feature.name} className="relative pl-12">
-                <dt className="font-callout font-semibold leading-7">
-                  <div className="absolute left-0 top-0 flex size-9 items-center justify-center rounded-lg bg-foreground [&_svg]:text-background">
-                    <feature.icon className="size-5" aria-hidden="true" />
-                  </div>
-                  {feature.name}
-                </dt>
-                <dd className="mt-2 font-callout leading-7 text-foreground/60">
-                  {feature.description}
-                </dd>
+        {/* Feature grid - Bento style */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {FEATURES.map((feature, index) => (
+            <div
+              key={feature.name}
+              className={`group relative rounded-2xl border border-border bg-background p-6 transition-all duration-200 hover:border-foreground/20 hover:shadow-lg ${
+                index === 0 ? "md:col-span-2 lg:col-span-1" : ""
+              }`}
+            >
+              {/* Icon */}
+              <div className="mb-4 inline-flex items-center justify-center size-10 rounded-xl bg-foreground/5 border border-border group-hover:bg-foreground/10 transition-colors">
+                <feature.icon className="size-5 text-foreground/70" />
               </div>
-            ))}
-          </dl>
+
+              {/* Content */}
+              <h3 className="font-callout font-semibold mb-2">{feature.name}</h3>
+              <p className="font-footnote text-foreground/60 leading-relaxed">
+                {feature.description}
+              </p>
+
+              {/* Hover indicator */}
+              <div className="absolute bottom-6 right-6 opacity-0 group-hover:opacity-100 transition-opacity">
+                <svg
+                  className="size-4 text-foreground/30"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M9 5l7 7-7 7"
+                  />
+                </svg>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Bottom CTA */}
+        <div className="mt-16 text-center">
+          <p className="font-footnote text-foreground/50">
+            Plus TypeScript, ESLint, Prettier, and more configured out of the box.
+          </p>
         </div>
       </div>
     </section>

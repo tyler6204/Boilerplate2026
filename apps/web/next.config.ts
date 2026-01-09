@@ -13,7 +13,12 @@ loadEnv({ path: resolve(__dirname, "../../.env.local"), override: true, quiet: t
 const nextConfig: NextConfig = {
   images: {
     unoptimized: process.env.NODE_ENV === "development",
-    remotePatterns: [],
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "placehold.co",
+      },
+    ],
   },
   allowedDevOrigins: ["lvh.me", "*.lvh.me"],
   async rewrites() {

@@ -3,7 +3,7 @@ import { Platform, TextInput, type TextInputProps } from 'react-native';
 
 function Input({
   className,
-  placeholderClassName,
+  placeholderTextColorClassName,
   ...props
 }: TextInputProps & React.RefAttributes<TextInput>) {
   return (
@@ -25,6 +25,7 @@ function Input({
         }),
         className
       )}
+      placeholderTextColorClassName={cn('text-muted-foreground', placeholderTextColorClassName)}
       {...props}
     />
   );

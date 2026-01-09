@@ -30,7 +30,7 @@ function Spinner({ className }: { className?: string }) {
       accessibilityRole="progressbar"
       accessibilityLabel="Loading"
     >
-      <IconSymbol name="arrow.trianglehead.2.clockwise" iconType="tabler" className={cn('size-4 font-bold text-primary', className)} />
+      <IconSymbol name="arrow.trianglehead.2.clockwise" iconType="tabler" className={cn('size-4 font-semibold text-primary', className)} />
     </Animated.View>
   );
 }

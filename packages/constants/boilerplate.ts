@@ -67,3 +67,25 @@ export const FAQS = [
     description: "Deploy the website to Vercel and the mobile app to EAS (Expo Application Services)."
   }
 ];
+
+// ============================================
+// SOCIAL LINKS - Change these values
+// ============================================
+export const SOCIAL_LINKS = {
+  /** X (Twitter) username without @ */
+  X_USERNAME: "yourapp",
+  /** Instagram username without @ */
+  INSTAGRAM_USERNAME: "yourapp",
+  /** TikTok username without @ */
+  TIKTOK_USERNAME: "yourapp",
+  /** GitHub organization or username */
+  GITHUB_USERNAME: "yourorg",
+} as const;
+
+/** Full URLs for social links */
+export const SOCIAL_URLS = {
+  X: `https://x.com/${SOCIAL_LINKS.X_USERNAME}`,
+  INSTAGRAM: `https://instagram.com/${SOCIAL_LINKS.INSTAGRAM_USERNAME}`,
+  TIKTOK: `https://tiktok.com/@${SOCIAL_LINKS.TIKTOK_USERNAME}`,
+  GITHUB: `https://github.com/${SOCIAL_LINKS.GITHUB_USERNAME}`,
+} as const;

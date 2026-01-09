@@ -67,7 +67,8 @@ function Checkbox({
         className={cn('bg-primary h-full w-full items-center justify-center', indicatorClassName)}>
         <IconSymbol
           name="checkmark"
-          className={cn('text-background font-semibold size-2.75', iconClassName)}
+          className={cn('text-background font-bold size-2.75', iconClassName)}
+          androidNative={false}
         />
       </CheckboxPrimitive.Indicator>
     </CheckboxPrimitive.Root>

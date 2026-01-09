@@ -19,13 +19,13 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default: cn(
-          'bg-primary active:bg-primary/90 shadow-sm shadow-black/5',
-          Platform.select({ web: 'hover:bg-primary/90' })
+          'bg-primary active:opacity-90 shadow-sm shadow-black/5',
+          Platform.select({ web: 'hover:opacity-90' })
         ),
         destructive: cn(
-          'bg-destructive active:bg-destructive/90 shadow-sm shadow-black/5',
+          'bg-destructive active:opacity-90 shadow-sm shadow-black/5',
           Platform.select({
-            web: 'hover:bg-destructive/90 focus-visible:ring-destructive/20',
+            web: 'hover:opacity-90 focus-visible:ring-destructive/20',
           })
         ),
         outline: cn(
@@ -35,8 +35,8 @@ const buttonVariants = cva(
           })
         ),
         secondary: cn(
-          'bg-secondary active:bg-secondary/80 shadow-sm shadow-black/5',
-          Platform.select({ web: 'hover:bg-secondary/80' })
+          'bg-secondary active:opacity-80 shadow-sm shadow-black/5',
+          Platform.select({ web: 'hover:opacity-80' })
         ),
         ghost: cn(
           'active:bg-accent',

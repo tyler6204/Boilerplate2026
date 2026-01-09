@@ -21,12 +21,17 @@ export function useDefaultScreenOptions() {
 }
 
 export function useHeaderStyle(tintColor: string | undefined = undefined) {
+  const isIOS = Platform.OS === 'ios';
+  const iosVersion = isIOS ? parseFloat(Platform.Version as string) : 0;
+  const isIOSGreaterThan26 = isIOS && iosVersion >= 26;
+
   const defaultTintColor = useTailwindToHex('primary');
   const backgroundColor = useTailwindToHex('background');
   const effectiveTintColor = tintColor ?? defaultTintColor;
+
   return {
     shadowColor: 'transparent' as undefined | 'transparent',
     color: effectiveTintColor as ColorValue,
-    backgroundColor: backgroundColor as ColorValue,
+    backgroundColor: (isIOSGreaterThan26 ? 'transparent' : backgroundColor) as ColorValue,
   };
 }

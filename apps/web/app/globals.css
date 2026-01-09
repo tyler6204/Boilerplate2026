@@ -2,3 +2,50 @@
 @import "tw-animate-css";
 @import "@repo/theme/theme.web.css";
 @import "@repo/theme/globals.css";
+
+/* ===========================================
+   CUSTOM ANIMATIONS
+   =========================================== */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes float-delayed {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+@layer utilities {
+  .animate-float {
+    animation: float 4s ease-in-out infinite;
+  }
+
+  .animate-float-delayed {
+    animation: float-delayed 4s ease-in-out infinite;
+    animation-delay: 1s;
+  }
+}
+
+/* ===========================================
+   SMOOTH SCROLLING
+   =========================================== */
+html {
+  scroll-behavior: smooth;
+}
+
+/* ===========================================
+   SELECTION STYLES
+   =========================================== */
+::selection {
+  background-color: var(--foreground);
+  color: var(--background);
+}
